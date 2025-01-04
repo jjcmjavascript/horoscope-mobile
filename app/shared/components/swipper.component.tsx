@@ -40,11 +40,21 @@ export function SwipperComponent() {
           >
             <View style={styles.card}>
               <Text style={styles.title}>{item.values.sign}</Text>
-              <Text style={styles.description}>{item.values.amor}</Text>
-              <Text style={styles.description}>{item.values.salud}</Text>
-              <Text style={styles.description}>{item.values.familia}</Text>
-              <Text style={styles.description}>{item.values.dinero}</Text>
-              <Text style={styles.description}>{item.values.consejo}</Text>
+              {item.values.amor && (
+                <Text style={styles.description}>{item.values.amor}</Text>
+              )}
+              {item.values.salud && (
+                <Text style={styles.description}>{item.values.salud}</Text>
+              )}
+              {item.values.familia && (
+                <Text style={styles.description}>{item.values.familia}</Text>
+              )}
+              {item.values.dinero && (
+                <Text style={styles.description}>{item.values.dinero}</Text>
+              )}
+              {item.values.consejo && (
+                <Text style={styles.description}>{item.values.consejo}</Text>
+              )}
             </View>
           </ScrollView>
         )}

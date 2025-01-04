@@ -53,7 +53,7 @@ export const getHoroscope = async (): Promise<HoroscopeResponse | string> => {
       formatedData: responseData.formatedDate,
     };
   } catch (err: unknown) {
-    console.error(err);
+    console.log(err);
     return errorMessage;
   }
 };

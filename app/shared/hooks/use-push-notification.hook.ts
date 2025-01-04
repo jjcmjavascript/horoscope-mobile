@@ -1,28 +1,34 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Notifications from 'expo-notifications';
-import { registerForPushNotificationsAsync } from '../helpers/register-for-push-notifications.helper';
+import { registerForPushNotificationsAsync } from '../services/register-for-push-notifications.service';
+import { sendPushNotificationToken } from '../services/send-push-notification-token.service';
 
 export const usePushNotification = () => {
   const [expoPushToken, setExpoPushToken] = useState('');
+  const [notificationPermissionError, setNotificationPermissionError] =
+    useState<string>('');
   const [notification, setNotification] = useState<
-    Notifications.Notification | undefined
+    Notifications.NotificationContent | undefined
   >(undefined);
   const notificationListener = useRef<Notifications.EventSubscription>();
   const responseListener = useRef<Notifications.EventSubscription>();
 
   useEffect(() => {
     registerForPushNotificationsAsync()
-      .then((token) => setExpoPushToken(token ?? ''))
-      .catch((error: any) => setExpoPushToken(`${error}`));
+      .then((token) => {
+        token && sendPushNotificationToken(token);
+        setExpoPushToken(token ?? '');
+      })
+      .catch((error: Error) => setNotificationPermissionError(error.message));
 
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
+        setNotification(notification.request.content);
       });
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
+        setNotification(response.notification.request.content);
       });
 
     return () => {
@@ -35,7 +41,10 @@ export const usePushNotification = () => {
     };
   }, []);
 
-  console.log(expoPushToken);
-
-  return { expoPushToken, notification, setNotification };
+  return {
+    expoPushToken,
+    notification,
+    notificationPermissionError,
+    setNotification,
+  };
 };
