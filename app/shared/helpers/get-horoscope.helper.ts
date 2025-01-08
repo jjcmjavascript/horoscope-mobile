@@ -31,7 +31,14 @@ export const getHoroscope = async (): Promise<HoroscopeResponse | string> => {
   const apiUrl = config.baseApiUrl;
 
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(`${apiUrl}/horoscope`, {
+      method: 'GET',
+      headers: {
+        'user-agent': 'mobile/horoscope',
+        'Content-Type': 'application/json; charset=utf-8',
+        Authorization: config.apiKey as string,
+      },
+    });
 
     if (!response.ok) {
       throw new Error('Error fetching data');

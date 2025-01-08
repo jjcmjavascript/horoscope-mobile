@@ -14,4 +14,5 @@ const baseApiUrl =
 export const config = {
   inProduction,
   baseApiUrl,
+  apiKey: process.env.EXPO_PUBLIC_MOBILE_KEY,
 };
