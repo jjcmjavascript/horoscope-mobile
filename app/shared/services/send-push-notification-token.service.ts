@@ -1,17 +1,12 @@
-import { config } from '@/app/config';
+import { fetchPublic } from './fetch-api.service';
 
 export const sendPushNotificationToken = async (token: string) => {
   try {
-    const result = await fetch(
-      config.baseApiUrl + '/push-notification-tokens',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token }),
-      },
-    );
+    const result = await fetchPublic({
+      url: 'push-notification-tokens',
+      method: 'POST',
+      body: { token },
+    });
 
     if (!result.ok) {
       throw new Error('Failed to send push notification token');
