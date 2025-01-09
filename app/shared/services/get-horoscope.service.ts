@@ -2,6 +2,7 @@ import { removeAccents } from '../helpers/string.helper';
 import { errorMessage } from '../constants/strings.constants';
 import { ZodiacSign } from '../entities/zodiac-sign.entity';
 import { fetchWithKey } from './fetch-api.service';
+import { horoscopeUrl } from '../constants/urls.constans';
 
 type ResponseSchema = {
   date: string;
@@ -30,7 +31,7 @@ export const getHoroscope = async (): Promise<HoroscopeResponse | string> => {
     escorpio: 11,
   };
   try {
-    const response = await fetchWithKey({ url: 'horoscopes' });
+    const response = await fetchWithKey({ url: horoscopeUrl });
 
     if (!response.ok) {
       throw new Error('Error fetching data');

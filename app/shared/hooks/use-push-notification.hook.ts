@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Notifications from 'expo-notifications';
 import { registerForPushNotificationsAsync } from '../services/register-for-push-notifications.service';
-import { sendPushNotificationToken } from '../services/send-push-notification-token.service';
+import { fetchPublic } from '../services/fetch-api.service';
+import { pushNotificationUrl } from '../constants/urls.constans';
 
 export const usePushNotification = () => {
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -15,8 +16,10 @@ export const usePushNotification = () => {
 
   useEffect(() => {
     registerForPushNotificationsAsync()
-      .then((token) => {
-        token && sendPushNotificationToken(token);
+      .then(async (token) => {
+        if (token) {
+          await fetchPublic({ url: pushNotificationUrl, body: { token } });
+        }
         setExpoPushToken(token ?? '');
       })
       .catch((error: Error) => setNotificationPermissionError(error.message));
