@@ -7,7 +7,7 @@ import { useShallow } from 'zustand/shallow';
 
 const { width, height } = Dimensions.get('window');
 
-const maxHeight = height * 0.7;
+const maxHeight = height * 0.6;
 
 export function SwipperComponent() {
   const { data, setPosition } = useAppStore(
