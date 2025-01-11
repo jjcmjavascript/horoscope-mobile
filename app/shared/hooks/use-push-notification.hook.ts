@@ -17,12 +17,20 @@ export const usePushNotification = () => {
   useEffect(() => {
     registerForPushNotificationsAsync()
       .then(async (token) => {
+        console.log('try to register');
         if (token) {
-          await fetchPublic({ url: pushNotificationUrl, body: { token } });
+          await fetchPublic({
+            url: pushNotificationUrl,
+            method: 'POST',
+            body: { token },
+          });
         }
         setExpoPushToken(token ?? '');
       })
-      .catch((error: Error) => setNotificationPermissionError(error.message));
+      .catch((error: Error) => {
+        console.log(error);
+        setNotificationPermissionError(error.message);
+      });
 
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {

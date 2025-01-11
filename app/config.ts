@@ -4,10 +4,9 @@ const inProduction = process.env.NODE_ENV === 'production';
 
 const localUri =
   'http://' +
-  (Constants.expoConfig?.hostUri || '').replace(
-    /:\d+/,
-    (process.env.EXPO_PUBLIC_LOCAL_PORT as string) || '3001',
-  );
+  (Constants.expoConfig?.hostUri || '')
+    .replace(/:\d+/, ':')
+    .concat((process.env.EXPO_PUBLIC_LOCAL_PORT as string) || '3001');
 
 const baseApiUrl = inProduction ? process.env.EXPO_PUBLIC_API_URL : localUri;
 
