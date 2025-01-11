@@ -20,8 +20,7 @@ export const WishesCreateModal = () => {
   const closeModal = useWishesStore((state) => state.closeModal);
   const createWish = useWishesStore((state) => state.createWish);
   const error = useWishesStore((state) => state.error);
-  const disabledButton =
-    wish.description.length < 5 || wish.description.length > 100;
+  const disabledButton = wish.description.length > 100;
 
   return (
     <Modal

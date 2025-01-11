@@ -12,7 +12,6 @@ export default function WishesContainer() {
   const hasWishes = useWishesStore((state) => state.list.length > 0);
   const openModal = useWishesStore((state) => state.openModal);
   const getWishList = useWishesStore((state) => state.getWishList);
-  const totalWishes = useWishesStore((state) => state.list.length);
 
   useEffect(() => {
     getWishList();
@@ -22,7 +21,7 @@ export default function WishesContainer() {
     <LinearContainer>
       {!hasWishes && !isLoading ? <WishesAlertBox /> : null}
 
-      <AddButton onPress={openModal} disabled={totalWishes >= 10} />
+      <AddButton onPress={openModal} />
 
       {isLoading ? <LoadingCircle /> : null}
 
