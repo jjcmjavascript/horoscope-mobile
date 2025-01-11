@@ -62,7 +62,7 @@ export default function RootLayout() {
     }
   }, [errors]);
 
-  usePushNotification();
+  // usePushNotification();
 
   return (
     <SafeAreaProvider>
