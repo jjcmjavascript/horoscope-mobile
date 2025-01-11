@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "horoscopoSP",
-    "slug": "horoscopoSP",
+    "name": "horoscope-mobile",
+    "slug": "horoscope-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/shared/assets/moon.png",
