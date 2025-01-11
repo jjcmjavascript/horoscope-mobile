@@ -1,5 +1,5 @@
-import Wishes from './components/wishes.componet';
+import WishesContainer from './components/wishes-container';
 
 export default function WishesLayout() {
-  return <Wishes />;
+  return <WishesContainer />;
 }

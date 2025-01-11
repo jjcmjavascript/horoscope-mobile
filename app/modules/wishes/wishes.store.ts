@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { Wish } from './wish.interface';
-import { createWish, getWishes } from './wishes.service';
+import { createWishes, deleteWish, getAllWishes } from './wishes.service';
 
 const defaultWish = {
   description: '',
@@ -23,13 +23,14 @@ interface Actions {
   openModal: () => void;
   createWish: (myWish: Wish) => void;
   getWishList: () => void;
+  destroyWish: (id: string) => void;
 }
 
 export const useWishesStore = create<State & Actions>((set) => {
   return {
     error: '',
-    showModal: true,
-    isLoading: false,
+    showModal: false,
+    isLoading: true,
     wish: { ...defaultWish },
     list: [],
     clearWish: () => {
@@ -66,7 +67,7 @@ export const useWishesStore = create<State & Actions>((set) => {
         isLoading: true,
       }));
 
-      getWishes()
+      getAllWishes()
         .then((list) => {
           set(() => ({
             list: list,
@@ -83,12 +84,38 @@ export const useWishesStore = create<State & Actions>((set) => {
       set(() => ({
         isLoading: true,
       }));
-      createWish(myWish)
-        .then(() => {
-          set((state) => ({
-            list: [...state.list, state.wish],
-            wish: { ...defaultWish },
+      createWishes(myWish)
+        .then((wish) => {
+          if (wish) {
+            set((state) => ({
+              list: [...state.list, wish],
+              wish: { ...defaultWish },
+            }));
+          }
+        })
+        .catch((e: Error) => {
+          set({ error: e.message });
+        })
+        .finally(() => {
+          set(() => ({
+            isLoading: false,
           }));
+        });
+    },
+    destroyWish: (wishId: string) => {
+      set(() => ({
+        isLoading: true,
+      }));
+
+      deleteWish(wishId)
+        .then(() => {
+          set((state) => {
+            const newList = state.list.filter((i) => i.id !== wishId);
+
+            return {
+              list: newList,
+            };
+          });
         })
         .catch((e: Error) => {
           set({ error: e.message });

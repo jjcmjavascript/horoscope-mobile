@@ -38,7 +38,6 @@ export function RotatingImage() {
 
   useEffect(() => {
     rotateImage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
   return (
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     height: height * 0.4,
     aspectRatio: 1,
     top: height * 0.07,
-    left: width / 2 - width * 0.4,
+    left: width / 2 - width * 0.43,
     shadowColor: 'red',
   },
 });

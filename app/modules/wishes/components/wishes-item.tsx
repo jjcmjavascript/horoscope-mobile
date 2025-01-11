@@ -1,53 +1,65 @@
-import { wishesPlaceHolder } from '@/app/shared/constants/strings.constants';
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
-import EvilIcons from '@expo/vector-icons/EvilIcons';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { Wish } from '../wish.interface';
+import { useWishesStore } from '../wishes.store';
 
-interface WishesListItemProps {
-  itemData: {
-    description: string;
-    locked: boolean;
-  };
-}
 const { width } = Dimensions.get('screen');
 
-export const WishesListItem = ({ itemData }: WishesListItemProps) => (
-  <View
-    style={{
-      flex: 1,
-      flexDirection: 'row',
-      width: width * 0.9,
-      alignItems: 'center',
-      marginTop: 10,
-      paddingLeft: 25,
-      paddingRight: 5,
-      paddingBottom: 5,
-      paddingTop: 5,
-      backgroundColor: 'white',
-      borderRadius: 5,
-    }}
-  >
-    <Text
+export const WishesListItem = ({ itemData }: { itemData: Wish }) => {
+  const destroyWish = useWishesStore((state) => state.destroyWish);
+
+  return (
+    <View
       style={{
-        fontSize: 40,
-        position: 'absolute',
-        left: 0,
+        flex: 1,
+        flexDirection: 'row',
+        width: width * 0.9,
+        alignItems: 'center',
+        marginTop: 10,
+        paddingLeft: 25,
+        paddingRight: 25,
+        paddingBottom: 5,
+        paddingTop: 5,
+        backgroundColor: 'white',
+        borderRadius: 5,
       }}
     >
-      💫
-    </Text>
-    <Text
-      style={{
-        paddingLeft: 10,
-        borderRadius: 2,
-        shadowColor: 'black',
-        minHeight: 50,
-        width: '100%',
-      }}
-    >
-      {itemData.description}
-    </Text>
-    <TouchableOpacity>
-      <EvilIcons name="lock" size={24} color="black" />
-    </TouchableOpacity>
-  </View>
-);
+      <Text
+        style={{
+          fontSize: 40,
+          position: 'absolute',
+          left: 0,
+        }}
+      >
+        💫
+      </Text>
+      <Text
+        style={{
+          paddingLeft: 10,
+          borderRadius: 2,
+          shadowColor: 'black',
+          minHeight: 50,
+          width: '100%',
+        }}
+      >
+        {itemData.description}
+      </Text>
+      <TouchableOpacity
+        onPress={() => {
+          console.log('inte', itemData);
+          return itemData.id ? destroyWish(itemData.id) : null;
+        }}
+        style={{
+          backgroundColor: 'white',
+          position: 'absolute',
+          top: 0,
+          right: 0,
+        }}
+      >
+        <Text>
+          <AntDesign name="delete" size={18} color="#880E4F" />
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};

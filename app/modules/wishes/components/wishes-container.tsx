@@ -7,11 +7,12 @@ import { WishesList } from './wishes-list';
 import { WishesCreateModal } from './wishes-create-modal';
 import { useEffect } from 'react';
 
-export default function Wishes() {
+export default function WishesContainer() {
   const isLoading = useWishesStore((state) => state.isLoading);
   const hasWishes = useWishesStore((state) => state.list.length > 0);
   const openModal = useWishesStore((state) => state.openModal);
   const getWishList = useWishesStore((state) => state.getWishList);
+  const totalWishes = useWishesStore((state) => state.list.length);
 
   useEffect(() => {
     getWishList();
@@ -19,13 +20,13 @@ export default function Wishes() {
 
   return (
     <LinearContainer>
-      {!hasWishes ? <WishesAlertBox /> : null}
+      {!hasWishes && !isLoading ? <WishesAlertBox /> : null}
 
-      <AddButton onPress={openModal} />
+      <AddButton onPress={openModal} disabled={totalWishes >= 10} />
 
       {isLoading ? <LoadingCircle /> : null}
 
-      {hasWishes ? <WishesList /> : null}
+      {hasWishes && !isLoading ? <WishesList /> : null}
 
       <WishesCreateModal />
     </LinearContainer>

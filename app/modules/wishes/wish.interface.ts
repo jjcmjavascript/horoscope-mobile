@@ -1,5 +1,5 @@
 export interface Wish {
-  id?: number;
+  id?: string;
   description: string;
   locked: boolean;
 }

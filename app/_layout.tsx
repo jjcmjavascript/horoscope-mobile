@@ -1,5 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
   homeTagTitle,
   homeTitle,
@@ -8,6 +9,7 @@ import {
 } from './shared/constants/strings.constants';
 import { StyleSheet, Text } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+
 export default function Layout() {
   return (
     <PaperProvider>
@@ -36,7 +38,11 @@ export default function Layout() {
             ),
             title: homeTagTitle,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="zodiac-virgo"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />
@@ -49,7 +55,7 @@ export default function Layout() {
             ),
             title: wishesTagTitle,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="list" color={color} size={size} />
+              <Ionicons name="list-circle-outline" color={color} size={size} />
             ),
           }}
         />
