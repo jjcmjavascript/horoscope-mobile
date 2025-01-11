@@ -35,14 +35,6 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ],
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./app/shared/assets/fonts/Moonlight.otf"
-          ]
-        }
       ]
     ],
     "experiments": {

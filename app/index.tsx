@@ -12,7 +12,6 @@ import { configureReanimatedLogger } from 'react-native-reanimated';
 import { Tabs } from 'expo-router';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-import { useMoonLight } from './shared/hooks/useFont';
 import { usePushNotification } from './shared/hooks/use-push-notification.hook';
 import { useAppStore } from './shared/hooks/use-app-store.hook';
 import { HomeContainer } from './shared/components/home.component';
@@ -35,8 +34,6 @@ export default function RootLayout() {
       setErrors: state.setErrors,
     })),
   );
-
-  useMoonLight();
 
   useEffect(() => {
     getData();
@@ -62,7 +59,7 @@ export default function RootLayout() {
     }
   }, [errors]);
 
-  // usePushNotification();
+  usePushNotification();
 
   return (
     <SafeAreaProvider>

@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     width: '100%',
     textAlign: 'center',
-    fontFamily: 'MoonLight',
   },
   description: {
     fontSize: 16,
