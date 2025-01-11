@@ -7,10 +7,17 @@ import {
 
 export const AddButton = ({
   onPress,
+  disabled,
 }: {
+  disabled?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
 }) => (
-  <TouchableOpacity style={styles.container} onPress={onPress}>
+  <TouchableOpacity
+    style={styles.container}
+    onPress={onPress}
+    disabled={disabled}
+    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+  >
     <Text style={styles.text}>+</Text>
   </TouchableOpacity>
 );
@@ -22,8 +29,8 @@ const styles = StyleSheet.create({
     bottom: 20,
     backgroundColor: '#6A1B9A',
     fontSize: 20,
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 80,
     borderRadius: 20,
     justifyContent: 'center',
     shadowColor: '#000',
@@ -34,6 +41,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4.65,
     elevation: 5,
+    zIndex: 3,
   },
   text: {
     textAlign: 'center',

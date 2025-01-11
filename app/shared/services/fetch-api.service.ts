@@ -30,7 +30,7 @@ export const fetchWithKey = ({ url }: { url: string }) =>
     },
   });
 
-export const fetchSigned = async ({
+export const fetchSigned = async <T>({
   url,
   method = 'GET',
   body,
@@ -38,7 +38,7 @@ export const fetchSigned = async ({
 }: {
   method?: string;
   url: string;
-  body?: Record<string, string>;
+  body?: T;
   headers?: Record<string, string>;
 }) => {
   const defaultHeader = {
@@ -46,7 +46,7 @@ export const fetchSigned = async ({
     'Content-Type': 'application/json; charset=utf-8',
   };
 
-  return fetch(url, {
+  return fetch(`${config.baseApiUrl}/${url}`, {
     credentials: 'include',
     method,
     headers: { ...defaultHeader, ...headers },

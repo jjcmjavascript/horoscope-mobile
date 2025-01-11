@@ -3,7 +3,7 @@ import { View, StyleSheet, Animated, Dimensions } from 'react-native';
 import { useAppStore } from '../hooks/use-app-store.hook';
 
 const img = require('../assets/zodiac.png');
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('screen');
 
 export function RotatingImage() {
   const position = useAppStore((state) => state.position);

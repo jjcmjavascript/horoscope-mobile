@@ -24,7 +24,7 @@ configureReanimatedLogger({
 
 SplashScreen.preventAutoHideAsync();
 
-const { height } = Dimensions.get('window');
+const { height } = Dimensions.get('screen');
 
 export default function RootLayout() {
   const { formatedDate, errors, setErrors, getData } = useAppStore(

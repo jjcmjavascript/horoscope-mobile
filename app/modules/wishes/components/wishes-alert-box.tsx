@@ -1,13 +1,27 @@
-import { View, Text } from 'react-native';
+import { wishesText } from '@/app/shared/constants/strings.constants';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+const { width } = Dimensions.get('screen');
 
 export const WishesAlertBox = () => {
   return (
-    <View>
-      <Text>
-        🌟 Es cierto que puedes tener un montón de metas maravillosas, pero te
-        recomiendo no tener más de tres al año. 🎯 Mientras más te concentres en
-        unas pocas, más fácil será alcanzarlas. ✔️
-      </Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>{wishesText}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: width * 0.8,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.6)',
+    padding: 10,
+    borderRadius: 10,
+    position: 'absolute',
+    top: 20,
+  },
+  text: {
+    fontSize: 18,
+    fontStyle: 'italic',
+  },
+});

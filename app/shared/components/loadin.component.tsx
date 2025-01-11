@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { cargando } from '../constants/strings.constants';
 
-const { height } = Dimensions.get('window');
+const { height } = Dimensions.get('screen');
 
 export const LoadingCircle = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;

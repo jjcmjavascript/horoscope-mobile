@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useAppStore } from '../hooks/use-app-store.hook';
 import { useShallow } from 'zustand/shallow';
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('screen');
 
 const maxHeight = height * 0.6;
 
