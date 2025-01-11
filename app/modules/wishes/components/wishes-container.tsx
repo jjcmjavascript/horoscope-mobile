@@ -1,6 +1,6 @@
-import { AddButton } from '@/app/shared/components/add-button.component';
-import { LinearContainer } from '@/app/shared/components/linear-containet.component';
-import { LoadingCircle } from '@/app/shared/components/loadin.component';
+import { AddButton } from '@/shared/components/add-button.component';
+import { LinearContainer } from '@/shared/components/linear-containet.component';
+import { LoadingCircle } from '@/shared/components/loadin.component';
 import { useWishesStore } from '../wishes.store';
 import { WishesAlertBox } from './wishes-alert-box';
 import { WishesList } from './wishes-list';

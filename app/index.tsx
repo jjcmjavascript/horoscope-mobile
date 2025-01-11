@@ -12,9 +12,9 @@ import { configureReanimatedLogger } from 'react-native-reanimated';
 import { Tabs } from 'expo-router';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-import { usePushNotification } from './shared/hooks/use-push-notification.hook';
-import { useAppStore } from './shared/hooks/use-app-store.hook';
-import { HomeContainer } from './shared/components/home.component';
+import { usePushNotification } from '@/shared/hooks/use-push-notification.hook';
+import { useAppStore } from '@/shared/hooks/use-app-store.hook';
+import { HomeContainer } from '@/shared/components/home.component';
 import { useShallow } from 'zustand/shallow';
 
 configureReanimatedLogger({
@@ -37,6 +37,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     getData();
+    SplashScreen.hideAsync();
   }, []);
 
   const message = errors.join('\n');

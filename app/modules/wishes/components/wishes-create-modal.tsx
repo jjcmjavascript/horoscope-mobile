@@ -1,4 +1,4 @@
-import { Modal } from '@/app/shared/components/modal.components';
+import { Modal } from '@/shared/components/modal.components';
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,7 @@ import { useWishesStore } from '../wishes.store';
 import {
   wishesErrorInCreate,
   wishesPlaceHolder,
-} from '@/app/shared/constants/strings.constants';
+} from '@/shared/constants/strings.constants';
 import { useShallow } from 'zustand/shallow';
 
 export const WishesCreateModal = () => {

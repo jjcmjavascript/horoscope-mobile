@@ -19,6 +19,7 @@ export const usePushNotification = () => {
       .then(async (token) => {
         console.log('try to register');
         if (token) {
+          console.log(token);
           await fetchPublic({
             url: pushNotificationUrl,
             method: 'POST',

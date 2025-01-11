@@ -1,4 +1,4 @@
-import { wishesText } from '@/app/shared/constants/strings.constants';
+import { wishesText } from '@/shared/constants/strings.constants';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 const { width } = Dimensions.get('screen');
 

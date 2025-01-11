@@ -6,7 +6,7 @@ import {
   homeTitle,
   wishesTagTitle,
   wishesTitle,
-} from './shared/constants/strings.constants';
+} from '@/shared/constants/strings.constants';
 import { StyleSheet, Text } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 
