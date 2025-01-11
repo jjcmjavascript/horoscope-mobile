@@ -44,3 +44,6 @@ app/shared/assets/*.png
 app/shared/assets/*.webp
 firebase.json
 google-services.json
+android
+key.keystore
+ios
