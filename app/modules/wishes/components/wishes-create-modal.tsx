@@ -12,29 +12,38 @@ import {
   wishesPlaceHolder,
 } from '@/shared/constants/strings.constants';
 import { useShallow } from 'zustand/shallow';
+import { InputBlur } from '@/shared/components/input-blur.component';
 
 export const WishesCreateModal = () => {
-  const showModal = useWishesStore((state) => state.showModal);
-  const wish = useWishesStore(useShallow((state) => state.wish));
+  const { wish, closeModal, showModal, createWish, error } = useWishesStore(
+    useShallow((state) => ({
+      wish: state.wish,
+      closeModal: state.closeModal,
+      showModal: state.showModal,
+      createWish: state.createWish,
+      error: state.error,
+      writeOnWish: state.writeOnWish,
+    })),
+  );
+
+  const wishDescription = useWishesStore((state) => state.wish.description);
   const writeOnWish = useWishesStore((state) => state.writeOnWish);
-  const closeModal = useWishesStore((state) => state.closeModal);
-  const createWish = useWishesStore((state) => state.createWish);
-  const error = useWishesStore((state) => state.error);
-  const disabledButton = wish.description.length > 100;
+  const disabledButton = wishDescription.length > 100;
 
   return (
     <Modal show={showModal} style={styles.modalContainer}>
-      <TextInput
-        onChangeText={(value) => {
+      <InputBlur
+        value={wishDescription}
+        placeholder={wishesPlaceHolder}
+        handler={(value) => {
           writeOnWish({
             description: value,
           });
         }}
-        value={wish.description}
-        placeholder={wishesPlaceHolder}
-        style={styles.textInput}
       />
-      <Text>{wish.description.length} de 100</Text>
+      <Text style={styles.wishDescription}>
+        {wishDescription.length} de 100
+      </Text>
       <Text>{error ? wishesErrorInCreate : ''}</Text>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.buttonCancel} onPress={closeModal}>
@@ -54,6 +63,9 @@ export const WishesCreateModal = () => {
 };
 
 const styles = StyleSheet.create({
+  wishDescription: {
+    marginTop: 15,
+  },
   modalContainer: {
     flex: 0,
     width: '90%',
@@ -71,6 +83,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowColor: 'black',
     width: '100%',
+    height: 60,
+    minHeight: 60,
   },
   buttonsContainer: {
     flexDirection: 'row',

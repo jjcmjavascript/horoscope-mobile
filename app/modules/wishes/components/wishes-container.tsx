@@ -6,12 +6,17 @@ import { WishesAlertBox } from './wishes-alert-box';
 import { WishesList } from './wishes-list';
 import { WishesCreateModal } from './wishes-create-modal';
 import { useEffect } from 'react';
+import { useShallow } from 'zustand/shallow';
 
 export default function WishesContainer() {
-  const isLoading = useWishesStore((state) => state.isLoading);
-  const hasWishes = useWishesStore((state) => state.list.length > 0);
-  const openModal = useWishesStore((state) => state.openModal);
-  const getWishList = useWishesStore((state) => state.getWishList);
+  const { isLoading, hasWishes, openModal, getWishList } = useWishesStore(
+    useShallow((state) => ({
+      hasWishes: state.list.length > 0,
+      openModal: state.openModal,
+      getWishList: state.getWishList,
+      isLoading: state.isLoading,
+    })),
+  );
 
   useEffect(() => {
     getWishList();

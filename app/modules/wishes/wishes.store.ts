@@ -90,6 +90,7 @@ export const useWishesStore = create<State & Actions>((set) => {
             set((state) => ({
               list: [...state.list, wish],
               wish: { ...defaultWish },
+              showModal: false,
             }));
           }
         })

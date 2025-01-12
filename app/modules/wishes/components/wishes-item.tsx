@@ -55,9 +55,10 @@ export const WishesListItem = ({ itemData }: { itemData: Wish }) => {
           top: 0,
           right: 0,
         }}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
       >
         <Text>
-          <AntDesign name="delete" size={18} color="#880E4F" />
+          <AntDesign name="close" size={16} color="#880E4F" />
         </Text>
       </TouchableOpacity>
     </View>
