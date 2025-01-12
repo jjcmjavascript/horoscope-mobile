@@ -4,7 +4,7 @@
     "slug": "horoscope-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/shared/assets/moon.png",
+    "icon": "./shared/assets/moon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -14,7 +14,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/shared/assets/moon.png",
+        "foregroundImage": "./shared/assets/moon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.jgintoki.horoscopemobile",
@@ -23,14 +23,14 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./app/shared/assets/moon.png"
+      "favicon": "./shared/assets/moon.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./app/shared/assets/splash.png",
+          "image": "./shared/assets/splash.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -39,7 +39,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./app/shared/assets/moon96.png",
+          "icon": "./shared/assets/moon96.png",
           "color": "#ffffff",
           "defaultChannel": "default",
           "sounds": [
