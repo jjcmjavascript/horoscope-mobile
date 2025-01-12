@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ViewStyle } from 'react-native';
-import { Modal as MyModal, Portal, Text } from 'react-native-paper';
+import { Modal as MyModal, Portal } from 'react-native-paper';
 
 interface ModalProps {
   show: boolean;

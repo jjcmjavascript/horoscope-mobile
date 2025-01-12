@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { ZodiacSign } from '../entities/zodiac-sign.entity';
-import { getHoroscope as getHoroscopeService } from '@/app/shared/services/get-horoscope.service';
+import { getHoroscope as getHoroscopeService } from '@/shared/services/get-horoscope.service';
 
 interface State {
   data: ZodiacSign[];
