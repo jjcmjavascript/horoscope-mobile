@@ -23,18 +23,7 @@ export const WishesCreateModal = () => {
   const disabledButton = wish.description.length > 100;
 
   return (
-    <Modal
-      show={showModal}
-      style={{
-        flex: 0,
-        width: '90%',
-        marginLeft: '5%',
-        height: 200,
-        borderRadius: 20,
-        padding: 20,
-        justifyContent: 'space-around',
-      }}
-    >
+    <Modal show={showModal} style={styles.modalContainer}>
       <TextInput
         onChangeText={(value) => {
           writeOnWish({
@@ -65,6 +54,15 @@ export const WishesCreateModal = () => {
 };
 
 const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 0,
+    width: '90%',
+    marginLeft: '5%',
+    height: 200,
+    borderRadius: 20,
+    padding: 20,
+    justifyContent: 'space-around',
+  },
   textInput: {
     borderWidth: 1,
     borderColor: '#ccc',
