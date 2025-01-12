@@ -66,7 +66,7 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={['top']}>
         <ImageBackground
-          source={require('./shared/assets/background2.webp')}
+          source={require('../shared/assets/background2.webp')}
           style={styles.background}
           resizeMode="cover"
         >
