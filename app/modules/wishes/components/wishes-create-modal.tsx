@@ -1,11 +1,5 @@
 import { Modal } from '@/shared/components/modal.components';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useWishesStore } from '../wishes.store';
 import {
   wishesErrorInCreate,
