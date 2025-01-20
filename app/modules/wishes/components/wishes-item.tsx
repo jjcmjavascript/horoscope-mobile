@@ -46,7 +46,6 @@ export const WishesListItem = ({ itemData }: { itemData: Wish }) => {
       </Text>
       <TouchableOpacity
         onPress={() => {
-          console.log('inte', itemData);
           return itemData.id ? destroyWish(itemData.id) : null;
         }}
         style={{
