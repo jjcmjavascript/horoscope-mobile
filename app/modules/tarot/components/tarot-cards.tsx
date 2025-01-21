@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Text,
 } from 'react-native';
 import { useTarotStore } from '../tarot.store';
 
@@ -21,7 +22,7 @@ export const TarotCards = () => {
         style={{ maxHeight: cardHeight, width: width * 0.9 }}
         horizontal={true}
         data={cards}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <TouchableOpacity
             onPress={() => selectOne(item.cardName)}
             style={[
@@ -34,6 +35,7 @@ export const TarotCards = () => {
               style={styles.cardImage}
               resizeMode="cover"
             />
+            <Text style={styles.cardNumber}>{item.index}</Text>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.cardUrl}
@@ -70,5 +72,14 @@ const styles = StyleSheet.create({
   cardImage: {
     width: '100%',
     height: '100%',
+  },
+  cardNumber: {
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    fontSize: 30,
+    position: 'absolute',
+    textShadowColor: 'yellow',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 20,
   },
 });

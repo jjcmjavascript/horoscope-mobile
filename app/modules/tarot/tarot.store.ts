@@ -3,6 +3,7 @@ import { cards } from './helpers/cards.helper';
 import { config } from '@/config';
 
 interface Card {
+  index: number;
   cardName: string;
   backUrl: string;
   cardUrl: string;
@@ -14,11 +15,12 @@ const formatName = (name: string) =>
 
 const cardsRandom = cards
   .sort(() => Math.random() - 0.5)
-  .map((card) => ({
+  .map((card, i) => ({
+    index: i + 1,
     cardName: card,
     backUrl: `${config.imageUrl}/back.png`,
     cardUrl: `${config.imageUrl}/${formatName(card)}`,
-    inverted: false,
+    inverted: Math.random() > 0.5,
   }));
 
 interface State {
