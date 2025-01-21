@@ -4,6 +4,8 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
   homeTagTitle,
   homeTitle,
+  tarotTagTitle,
+  tarotTitle,
   wishesTagTitle,
   wishesTitle,
 } from '@/shared/constants/strings.constants';
@@ -54,6 +56,19 @@ export default function Layout() {
               <Text style={styles.titleStyle}>{wishesTitle}</Text>
             ),
             title: wishesTagTitle,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="list-circle-outline" color={color} size={size} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="modules/tarot"
+          options={{
+            headerTitle: () => (
+              <Text style={styles.titleStyle}>{tarotTitle}</Text>
+            ),
+            title: tarotTagTitle,
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="list-circle-outline" color={color} size={size} />
             ),

@@ -6,6 +6,7 @@ import { pushNotificationUrl } from '../constants/urls.constans';
 
 export const usePushNotification = () => {
   const [expoPushToken, setExpoPushToken] = useState('');
+  const [isLoading, setLoading] = useState(false);
   const [notificationPermissionError, setNotificationPermissionError] =
     useState<string>('');
   const [notification, setNotification] = useState<
@@ -14,12 +15,19 @@ export const usePushNotification = () => {
   const notificationListener = useRef<Notifications.EventSubscription>();
   const responseListener = useRef<Notifications.EventSubscription>();
 
-  useEffect(() => {
+  const createToken = () => {
+    if (expoPushToken) {
+      console.log('token regitered yet');
+      return;
+    }
+
+    setLoading(true);
     registerForPushNotificationsAsync()
       .then(async (token) => {
         console.log('try to register');
         if (token) {
-          console.log(token);
+          console.log('token registed');
+
           await fetchPublic({
             url: pushNotificationUrl,
             method: 'POST',
@@ -31,6 +39,10 @@ export const usePushNotification = () => {
       .catch((error: Error) => {
         console.log(error);
         setNotificationPermissionError(error.message);
+      })
+      .finally(() => {
+        console.log('process finished');
+        setLoading(false);
       });
 
     notificationListener.current =
@@ -51,9 +63,13 @@ export const usePushNotification = () => {
       responseListener.current &&
         Notifications.removeNotificationSubscription(responseListener.current);
     };
-  }, []);
+  };
+
+  useEffect(createToken, []);
 
   return {
+    isLoading,
+    createToken,
     expoPushToken,
     notification,
     notificationPermissionError,
