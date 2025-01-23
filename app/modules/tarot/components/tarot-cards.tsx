@@ -10,57 +10,43 @@ import {
 import { useTarotStore } from '../tarot.store';
 
 const { width } = Dimensions.get('screen');
-const cardWidth = width / 3;
-const cardHeight = cardWidth * 1.4;
+const cardWidth = width / 4;
+const cardHeight = cardWidth * 1.3;
 
 export const TarotCards = () => {
   const { cards, seletedCards, selectOne } = useTarotStore();
 
   return (
-    <View>
-      <FlatList
-        style={{ maxHeight: cardHeight, width: width * 0.9 }}
-        horizontal={true}
-        data={cards}
-        renderItem={({ item, index }) => (
-          <TouchableOpacity
-            onPress={() => selectOne(item.cardName)}
-            style={[
-              styles.cardContainer,
-              { width: cardWidth, height: cardHeight, backgroundColor: 'red' },
-            ]}
-          >
-            <Image
-              source={{ uri: item.backUrl }}
-              style={styles.cardImage}
-              resizeMode="cover"
-            />
-            <Text style={styles.cardNumber}>{item.index}</Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.cardUrl}
-      />
-
-      <View
-        style={{
-          width: width * 0.9,
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'blue',
-        }}
-      >
-        {seletedCards.map((card) => (
+    <FlatList
+      style={{
+        width: width * 0.9,
+        marginTop: 10,
+        maxHeight: cardHeight * 1.1,
+      }}
+      contentContainerStyle={{
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      horizontal={true}
+      data={cards}
+      renderItem={({ item, index }) => (
+        <TouchableOpacity
+          onPress={() => selectOne(item.cardName)}
+          style={[
+            styles.cardContainer,
+            { width: cardWidth, height: cardHeight },
+          ]}
+        >
           <Image
-            key={card.cardName}
-            source={{ uri: card.cardUrl }}
-            style={{ width: 100, height: 140 }}
+            source={{ uri: item.backUrl }}
+            style={styles.cardImage}
             resizeMode="cover"
           />
-        ))}
-      </View>
-    </View>
+          <Text style={styles.cardNumber}>{item.index}</Text>
+        </TouchableOpacity>
+      )}
+      keyExtractor={(item) => item.cardUrl}
+    />
   );
 };
 
