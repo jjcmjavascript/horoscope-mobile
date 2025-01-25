@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 
 const { width } = Dimensions.get('screen');
-const cardWidth = width / 4;
-const cardHeight = cardWidth * 1.3;
+const cardWidth = width / 3.2;
+const cardHeight = cardWidth * 1.4;
 
 export const TarotCardsSelector = ({
   data,
@@ -28,12 +28,10 @@ export const TarotCardsSelector = ({
   return (
     <FlatList
       style={{
-        width: width * 0.9,
-        marginTop: 10,
-        maxHeight: cardHeight * 1.1,
+        width: width,
+        maxHeight: cardHeight * 1.2,
       }}
       contentContainerStyle={{
-        justifyContent: 'center',
         alignItems: 'center',
       }}
       horizontal={true}
@@ -68,7 +66,8 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: '100%',
-    height: '100%',
+    height: '90%',
+    objectFit: 'contain',
   },
   cardNumberContainer: {
     position: 'absolute',
