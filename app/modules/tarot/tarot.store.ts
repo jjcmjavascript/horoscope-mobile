@@ -1,14 +1,7 @@
 import { create } from 'zustand';
 import { cards } from './helpers/cards.helper';
 import { config } from '@/config';
-
-interface Card {
-  index: number;
-  cardName: string;
-  backUrl: string;
-  cardUrl: string;
-  inverted: boolean;
-}
+import { Card } from './tarot.types';
 
 const formatName = (name: string) =>
   name.trim().toLowerCase().replace(/\s/g, '-').concat('.png');

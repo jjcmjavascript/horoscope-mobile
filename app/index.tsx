@@ -16,6 +16,7 @@ import { usePushNotification } from '@/shared/hooks/use-push-notification.hook';
 import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 import { HomeContainer } from '@/shared/components/home.component';
 import { useShallow } from 'zustand/shallow';
+import { colorsLight } from '@/shared/constants/colors.contants';
 
 configureReanimatedLogger({
   strict: false,
@@ -98,11 +99,11 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 30, // Un tamaño un poco mayor para destacar
+    fontSize: 30,
     fontWeight: 'bold',
-    color: '#6A1B9A',
+    color: colorsLight.colors.darkPurple,
     fontStyle: 'italic',
-    textShadowColor: 'white', // Color dorado con transparencia
+    textShadowColor: 'white',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 20, // Difuminado del halo
   },

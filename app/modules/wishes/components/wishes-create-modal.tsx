@@ -7,6 +7,7 @@ import {
 } from '@/shared/constants/strings.constants';
 import { useShallow } from 'zustand/shallow';
 import { InputBlur } from '@/shared/components/input-blur.component';
+import { colorsLight } from '@/shared/constants/colors.contants';
 
 export const WishesCreateModal = () => {
   const { wish, closeModal, showModal, createWish, error } = useWishesStore(
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: colorsLight.colors.gray,
     backgroundColor: 'white',
     paddingLeft: 10,
     borderRadius: 10,
@@ -90,16 +91,16 @@ const styles = StyleSheet.create({
   },
   buttonCancel: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    backgroundColor: '#CE93D8',
+    borderColor: colorsLight.colors.gray,
+    backgroundColor: colorsLight.colors.lightPink,
     padding: 10,
     width: '30%',
     borderRadius: 10,
   },
   buttonAcept: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    backgroundColor: '#6A1B9A',
+    borderColor: colorsLight.colors.gray,
+    backgroundColor: colorsLight.colors.darkPurple,
     padding: 10,
     width: '30%',
     borderRadius: 10,

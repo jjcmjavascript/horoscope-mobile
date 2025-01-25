@@ -11,6 +11,7 @@ import {
 } from '@/shared/constants/strings.constants';
 import { StyleSheet, Text } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import { colorsLight } from '@/shared/constants/colors.contants';
 
 export default function Layout() {
   return (
@@ -18,15 +19,15 @@ export default function Layout() {
       <Tabs
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#6A1B9A',
+            backgroundColor: colorsLight.colors.darkPurple,
           },
           headerTitleAlign: 'center',
           tabBarStyle: {
-            backgroundColor: '#6A1B9A',
+            backgroundColor: colorsLight.colors.darkPurple,
             borderTopWidth: 0,
           },
-          tabBarActiveTintColor: '#FFFFFF',
-          tabBarInactiveTintColor: '#BDBDBD',
+          tabBarActiveTintColor: colorsLight.colors.textActive,
+          tabBarInactiveTintColor: colorsLight.colors.textInactive,
           tabBarLabelStyle: {
             fontSize: 10, // Tamaño del texto
           },

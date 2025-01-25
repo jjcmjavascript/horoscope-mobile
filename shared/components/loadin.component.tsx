@@ -7,10 +7,23 @@ import {
   Dimensions,
 } from 'react-native';
 import { cargando } from '../constants/strings.constants';
+import { colorsLight } from '../constants/colors.contants';
 
 const { height } = Dimensions.get('screen');
 
-export const LoadingCircle = () => {
+export const LoadingCircle = ({
+  containerStyle,
+}: {
+  containerStyle?: {
+    position?: 'absolute' | 'relative';
+    flex: number;
+    backgroundColor?: string;
+    height?: number | '100%';
+    width?: number | '100%';
+    marginTop?: number;
+    zIndex?: number;
+  };
+}) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.loop(
@@ -30,8 +43,12 @@ export const LoadingCircle = () => {
   }, [fadeAnim]);
 
   return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color="#E91E63" />
+    <View style={[styles.container, containerStyle]}>
+      <ActivityIndicator
+        size="large"
+        color={colorsLight.colors.brilliantPink}
+      />
+
       <Animated.Text style={[styles.text, { opacity: fadeAnim }]}>
         {cargando}
       </Animated.Text>
@@ -41,13 +58,14 @@ export const LoadingCircle = () => {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: height * 0.4,
   },
   text: {
     fontSize: 18,
-    color: '#E91E63',
+    color: colorsLight.colors.brilliantPink,
     fontWeight: 'bold',
     textAlign: 'center',
     textShadowColor: 'white',

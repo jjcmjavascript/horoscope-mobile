@@ -1,21 +1,28 @@
 import {
   Dimensions,
   Image,
-  View,
   StyleSheet,
   FlatList,
   TouchableOpacity,
   Text,
 } from 'react-native';
-import { useTarotStore } from '../tarot.store';
 
 const { width } = Dimensions.get('screen');
 const cardWidth = width / 4;
 const cardHeight = cardWidth * 1.3;
 
-export const TarotCards = () => {
-  const { cards, seletedCards, selectOne } = useTarotStore();
-
+export const TarotCardsSelector = ({
+  data,
+  onPress,
+}: {
+  data: {
+    cardName: string;
+    backUrl: string;
+    index: number;
+    cardUrl: string;
+  }[];
+  onPress: (cardName: string) => void;
+}) => {
   return (
     <FlatList
       style={{
@@ -28,10 +35,10 @@ export const TarotCards = () => {
         alignItems: 'center',
       }}
       horizontal={true}
-      data={cards}
-      renderItem={({ item, index }) => (
+      data={data}
+      renderItem={({ item }) => (
         <TouchableOpacity
-          onPress={() => selectOne(item.cardName)}
+          onPress={() => onPress(item.cardName)}
           style={[
             styles.cardContainer,
             { width: cardWidth, height: cardHeight },
