@@ -1,3 +1,4 @@
+import { colorsLight } from '@/shared/constants/colors.contants';
 import {
   Dimensions,
   Image,
@@ -5,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
+  View,
 } from 'react-native';
 
 const { width } = Dimensions.get('screen');
@@ -49,7 +51,9 @@ export const TarotCardsSelector = ({
             style={styles.cardImage}
             resizeMode="cover"
           />
-          <Text style={styles.cardNumber}>{item.index}</Text>
+          <View style={styles.cardNumberContainer}>
+            <Text style={styles.cardNumber}>{item.index}</Text>
+          </View>
         </TouchableOpacity>
       )}
       keyExtractor={(item) => item.cardUrl}
@@ -66,13 +70,19 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  cardNumberContainer: {
+    position: 'absolute',
+    width: 35,
+    height: 35,
+    borderRadius: '50%',
+    backgroundColor: colorsLight.colors.darkPurple,
+  },
   cardNumber: {
     fontWeight: 'bold',
     fontStyle: 'italic',
-    fontSize: 30,
-    position: 'absolute',
-    textShadowColor: 'yellow',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 20,
+    fontSize: 18,
+    textAlign: 'center',
+    lineHeight: 35,
+    color: colorsLight.colors.gray,
   },
 });
