@@ -24,6 +24,7 @@ interface State {
 interface Actions {
   selectOne: (cardName: string) => void;
   shuffle: () => void;
+  ramdonSelect: () => void;
 }
 
 export const useTarotStore = create<State & Actions>((set) => {
@@ -47,6 +48,24 @@ export const useTarotStore = create<State & Actions>((set) => {
       set((state) => ({
         cards: state.cards.sort(() => Math.random() - 0.5),
       }));
+    },
+    ramdonSelect: () => {
+      set((state) => {
+        const originalCards = [...state.seletedCards, ...state.cards];
+
+        const seletedCards = originalCards
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 7);
+
+        const filteredCards: Card[] = originalCards.filter(
+          (c) => !seletedCards.some((s) => s.cardName === c.cardName),
+        );
+
+        return {
+          cards: filteredCards,
+          seletedCards: [...seletedCards],
+        };
+      });
     },
   };
 });

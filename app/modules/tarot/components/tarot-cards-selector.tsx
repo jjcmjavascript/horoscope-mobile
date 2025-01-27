@@ -1,4 +1,5 @@
 import { colorsLight } from '@/shared/constants/colors.contants';
+import { Fragment } from 'react';
 import {
   Dimensions,
   Image,
@@ -13,10 +14,7 @@ const { width } = Dimensions.get('screen');
 const cardWidth = width / 3.2;
 const cardHeight = cardWidth * 1.4;
 
-export const TarotCardsSelector = ({
-  data,
-  onPress,
-}: {
+interface TarotCardProps {
   data: {
     cardName: string;
     backUrl: string;
@@ -24,38 +22,48 @@ export const TarotCardsSelector = ({
     cardUrl: string;
   }[];
   onPress: (cardName: string) => void;
-}) => {
+  disabled?: boolean;
+}
+
+export const TarotCardsSelector = ({
+  data,
+  onPress,
+  disabled = false,
+}: TarotCardProps) => {
   return (
-    <FlatList
-      style={{
-        width: width,
-        maxHeight: cardHeight * 1.2,
-      }}
-      contentContainerStyle={{
-        alignItems: 'center',
-      }}
-      horizontal={true}
-      data={data}
-      renderItem={({ item }) => (
-        <TouchableOpacity
-          onPress={() => onPress(item.cardName)}
-          style={[
-            styles.cardContainer,
-            { width: cardWidth, height: cardHeight },
-          ]}
-        >
-          <Image
-            source={{ uri: item.backUrl }}
-            style={styles.cardImage}
-            resizeMode="cover"
-          />
-          <View style={styles.cardNumberContainer}>
-            <Text style={styles.cardNumber}>{item.index}</Text>
-          </View>
-        </TouchableOpacity>
-      )}
-      keyExtractor={(item) => item.cardUrl}
-    />
+    <Fragment>
+      <FlatList
+        style={{
+          width: width,
+          maxHeight: cardHeight * 1.2,
+        }}
+        contentContainerStyle={{
+          alignItems: 'center',
+        }}
+        horizontal={true}
+        data={data}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            disabled={disabled}
+            onPress={() => onPress(item.cardName)}
+            style={[
+              styles.cardContainer,
+              { width: cardWidth, height: cardHeight },
+            ]}
+          >
+            <Image
+              source={{ uri: item.backUrl }}
+              style={styles.cardImage}
+              resizeMode="cover"
+            />
+            <View style={styles.cardNumberContainer}>
+              <Text style={styles.cardNumber}>{item.index}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.cardUrl}
+      ></FlatList>
+    </Fragment>
   );
 };
 
