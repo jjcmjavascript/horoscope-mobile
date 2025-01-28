@@ -1,7 +1,1 @@
-export interface Card {
-  index: number;
-  cardName: string;
-  backUrl: string;
-  cardUrl: string;
-  inverted: boolean;
-}
+export type TarotReponse = { cards: string[]; reading: string }[];

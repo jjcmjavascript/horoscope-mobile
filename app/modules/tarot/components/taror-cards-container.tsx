@@ -4,6 +4,7 @@ import { TarotCardsSelected } from './tarot-selected-cards';
 import { useTarotStore } from '../tarot.store';
 import { colorsLight } from '@/shared/constants/colors.contants';
 import { useDisabledAddTarotCard } from '../tarot-store.selector';
+import { TarotOptions } from './tarot-options';
 
 export const TarotCardContainer = () => {
   const state = useTarotStore();
@@ -11,7 +12,7 @@ export const TarotCardContainer = () => {
   const disabledButton = useDisabledAddTarotCard();
 
   return (
-    <View>
+    <View style={{ flex: 1, alignItems: 'center' }}>
       <TarotCardsSelector
         data={state.cards}
         onPress={state.selectOne}
@@ -33,12 +34,15 @@ export const TarotCardContainer = () => {
       >
         <Text
           style={{
+            textAlign: 'center',
             color: colorsLight.colors.textActive,
           }}
         >
           Elegir al azar
         </Text>
       </TouchableOpacity>
+
+      <TarotOptions />
 
       <TarotCardsSelected data={state.seletedCards} />
     </View>

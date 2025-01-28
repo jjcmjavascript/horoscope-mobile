@@ -1,42 +1,49 @@
 import { create } from 'zustand';
-import { cards } from './helpers/cards.helper';
-import { config } from '@/config';
-import { Card } from './tarot.types';
+import { getTarot } from './tarot.service';
+import { CardEntity } from '@/shared/entities/card.entity';
+import { cardsRandom } from './helpers/cards.helper';
 
-const formatName = (name: string) =>
-  name.trim().toLowerCase().replace(/\s/g, '-').concat('.png');
-
-const cardsRandom = cards
-  .sort(() => Math.random() - 0.5)
-  .map((card, i) => ({
-    index: i + 1,
-    cardName: card,
-    backUrl: `${config.imageUrl}/back.png`,
-    cardUrl: `${config.imageUrl}/${formatName(card)}`,
-    inverted: Math.random() > 0.5,
-  }));
+type MessageHeaderType = {
+  name?: string | null;
+  question?: number | null;
+  token?: string | null;
+};
 
 interface State {
-  seletedCards: Card[];
-  cards: Card[];
+  readingResult: string | undefined;
+  messageHeader: MessageHeaderType;
+  seletedCards: CardEntity[];
+  cards: CardEntity[];
 }
 
 interface Actions {
-  selectOne: (cardName: string) => void;
+  selectOne: (name: string) => void;
   shuffle: () => void;
   ramdonSelect: () => void;
+  editMessageHeader: (messageHeader: MessageHeaderType) => void;
+  getReadingTarot: (
+    seletedCards: CardEntity[],
+    messageHeader: MessageHeaderType,
+  ) => void;
 }
 
 export const useTarotStore = create<State & Actions>((set) => {
   return {
+    readingResult: undefined,
+    messageHeader: {
+      name: null,
+      question: null,
+      token: null,
+    },
     seletedCards: [],
     cards: [...cardsRandom],
-    selectOne: (cardName: string) => {
+    selectOne: (name: string) => {
       set((state) => {
-        const card = state.cards.find((c) => c.cardName === cardName) as Card;
-        const filteredCards = state.cards.filter(
-          (c) => c.cardName !== cardName,
-        );
+        const card = state.cards.find(
+          (c) => c.values.name === name,
+        ) as CardEntity;
+
+        const filteredCards = state.cards.filter((c) => c.values.name !== name);
 
         return {
           cards: [...filteredCards],
@@ -57,8 +64,8 @@ export const useTarotStore = create<State & Actions>((set) => {
           .sort(() => Math.random() - 0.5)
           .slice(0, 7);
 
-        const filteredCards: Card[] = originalCards.filter(
-          (c) => !seletedCards.some((s) => s.cardName === c.cardName),
+        const filteredCards: CardEntity[] = originalCards.filter(
+          (c) => !seletedCards.some((s) => s.values.name === c.values.name),
         );
 
         return {
@@ -66,6 +73,23 @@ export const useTarotStore = create<State & Actions>((set) => {
           seletedCards: [...seletedCards],
         };
       });
+    },
+    editMessageHeader: (messageHeader: MessageHeaderType) => {
+      set((state) => ({
+        messageHeader: { ...state.messageHeader, ...messageHeader },
+      }));
+    },
+    getReadingTarot: async (
+      seletedCards: CardEntity[],
+      messageHeader: MessageHeaderType,
+    ) => {
+      const result = await getTarot(seletedCards, messageHeader);
+
+      if (result.ok) {
+        set((state) => ({
+          readingResult: result.data,
+        }));
+      }
     },
   };
 });

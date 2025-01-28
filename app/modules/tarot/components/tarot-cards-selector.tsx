@@ -1,4 +1,5 @@
 import { colorsLight } from '@/shared/constants/colors.contants';
+import { CardEntity } from '@/shared/entities/card.entity';
 import { Fragment } from 'react';
 import {
   Dimensions,
@@ -15,12 +16,7 @@ const cardWidth = width / 3.2;
 const cardHeight = cardWidth * 1.4;
 
 interface TarotCardProps {
-  data: {
-    cardName: string;
-    backUrl: string;
-    index: number;
-    cardUrl: string;
-  }[];
+  data: CardEntity[];
   onPress: (cardName: string) => void;
   disabled?: boolean;
 }
@@ -45,23 +41,23 @@ export const TarotCardsSelector = ({
         renderItem={({ item }) => (
           <TouchableOpacity
             disabled={disabled}
-            onPress={() => onPress(item.cardName)}
+            onPress={() => onPress(item.values.name)}
             style={[
               styles.cardContainer,
               { width: cardWidth, height: cardHeight },
             ]}
           >
             <Image
-              source={{ uri: item.backUrl }}
+              source={{ uri: item.values.backUrl }}
               style={styles.cardImage}
               resizeMode="cover"
             />
             <View style={styles.cardNumberContainer}>
-              <Text style={styles.cardNumber}>{item.index}</Text>
+              <Text style={styles.cardNumber}>{item.values.index}</Text>
             </View>
           </TouchableOpacity>
         )}
-        keyExtractor={(item) => item.cardUrl}
+        keyExtractor={(item) => item.values.cardUrl}
       ></FlatList>
     </Fragment>
   );

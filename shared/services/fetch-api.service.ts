@@ -20,14 +20,23 @@ export const fetchPublic = ({
     body: body ? JSON.stringify(body) : null,
   });
 
-export const fetchWithKey = ({ url }: { url: string }) =>
+export const fetchWithKey = async <T>({
+  url,
+  body,
+  method = 'GET',
+}: {
+  url: string;
+  method?: string;
+  body?: T;
+}) =>
   fetch(`${config.baseApiUrl}/${url}`, {
-    method: 'GET',
+    method,
     headers: {
       'user-agent': userAgent,
       'Content-Type': 'application/json; charset=utf-8',
       Authorization: config.apiKey as string,
     },
+    body: body ? JSON.stringify(body) : null,
   });
 
 export const fetchSigned = async <T>({

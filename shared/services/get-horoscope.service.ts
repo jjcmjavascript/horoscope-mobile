@@ -3,17 +3,7 @@ import { errorMessage } from '../constants/strings.constants';
 import { ZodiacSign } from '../entities/zodiac-sign.entity';
 import { fetchWithKey } from './fetch-api.service';
 import { horoscopeUrl } from '../constants/urls.constans';
-
-type ResponseSchema = {
-  date: string;
-  formatedDate: string;
-  signs: Record<string, Record<string, string>>;
-};
-
-type HoroscopeResponse = {
-  data: ZodiacSign[];
-  formatedData: string;
-};
+import { HoroscopeResponse, ResponseSchema } from '../types/horoscope.types';
 
 export const getHoroscope = async (): Promise<HoroscopeResponse | string> => {
   const order: Record<string, number> = {
