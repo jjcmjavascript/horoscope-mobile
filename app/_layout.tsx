@@ -58,7 +58,11 @@ export default function Layout() {
             ),
             title: wishesTagTitle,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="list-circle-outline" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="target-variant"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />
@@ -71,7 +75,11 @@ export default function Layout() {
             ),
             title: tarotTagTitle,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="list-circle-outline" color={color} size={size} />
+              <MaterialCommunityIcons
+                name="cards-playing-outline"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />

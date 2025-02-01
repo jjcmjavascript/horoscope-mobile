@@ -1,6 +1,7 @@
 import { fetchWithKey } from '@/shared/services/fetch-api.service';
 import { CardEntity } from '@/shared/entities/card.entity';
-import { tarotSelectOptions } from './helpers/cards.helper';
+import { getCardUrl, tarotSelectOptions } from './helpers/cards.helper';
+import { TarotReponseItem, TarotReponseWithUrlItem } from './tarot.types';
 
 export const tarotServiceIndex = async (token: string) => {
   try {
@@ -9,15 +10,22 @@ export const tarotServiceIndex = async (token: string) => {
       method: 'GET',
     });
 
-    console.log(response);
     if (!response.ok) {
-      throw new Error('Error fetching data');
+      throw new Error(`Error fetching data: ${response.status}`);
     }
-    const responseJson = await response.json();
+
+    const responseJson: TarotReponseItem[] = await response.json();
+
+    const formatedData: TarotReponseWithUrlItem[] = responseJson.map((item) => {
+      return {
+        ...item,
+        cardUrls: item.cards.map((card) => getCardUrl(card)),
+      };
+    });
 
     return {
       ok: true,
-      data: responseJson,
+      data: formatedData,
     };
   } catch (err: unknown) {
     console.log(err);
@@ -62,12 +70,18 @@ export const tarotServiceCreate = async (
     if (!response.ok) {
       throw new Error('Error fetching data');
     }
-    const responseJson = await response.json();
+    const responseJson: TarotReponseItem[] = await response.json();
 
-    console.log(responseJson);
+    const formatedData: TarotReponseWithUrlItem[] = responseJson.map((item) => {
+      return {
+        ...item,
+        cardUrls: item.cards.map((card) => getCardUrl(card)),
+      };
+    });
+
     return {
       ok: true,
-      data: responseJson,
+      data: formatedData,
     };
   } catch (err: unknown) {
     console.log(err);

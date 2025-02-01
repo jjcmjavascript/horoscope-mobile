@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { tarotServiceCreate, tarotServiceIndex } from './tarot.service';
 import { CardEntity } from '@/shared/entities/card.entity';
 import { cardsRandom } from './helpers/cards.helper';
+import { TarotReponseWithUrlItem } from './tarot.types';
 
 type MessageHeaderType = {
   name?: string | null;
@@ -10,7 +11,7 @@ type MessageHeaderType = {
 };
 
 interface State {
-  readingResult: string | undefined;
+  readingResult: TarotReponseWithUrlItem[];
   messageHeader: MessageHeaderType;
   seletedCards: CardEntity[];
   cards: CardEntity[];
@@ -30,7 +31,7 @@ interface Actions {
 
 export const useTarotStore = create<State & Actions>((set) => {
   return {
-    readingResult: undefined,
+    readingResult: [],
     messageHeader: {
       name: null,
       question: null,

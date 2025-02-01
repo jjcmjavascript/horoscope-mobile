@@ -1,7 +1,7 @@
 import { CardEntity } from '@/shared/entities/card.entity';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useTarotStore } from '../tarot.store';
-import { useDisabledAddTarotCard } from '../tarot-store.selector';
+import { useDisabledAddTarotCard } from '../tarot-store.hook';
 import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 
 export const TarotCardsSelected = ({ data }: { data: CardEntity[] }) => {

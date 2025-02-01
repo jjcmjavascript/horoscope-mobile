@@ -3,7 +3,7 @@ import { TarotCardsSelector } from './tarot-cards-selector';
 import { TarotCardsSelected } from './tarot-selected-cards';
 import { useTarotStore } from '../tarot.store';
 import { colorsLight } from '@/shared/constants/colors.contants';
-import { useDisabledAddTarotCard } from '../tarot-store.selector';
+import { useDisabledAddTarotCard } from '../tarot-store.hook';
 import { TarotOptions } from './tarot-options';
 
 export const TarotCardContainer = () => {

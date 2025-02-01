@@ -26,7 +26,7 @@ SplashScreen.preventAutoHideAsync();
 
 const { height } = Dimensions.get('screen');
 
-export default function RootLayout() {
+export default function MainComponent() {
   const { formatedDate, errors, setErrors, getData } = useAppStore(
     useShallow((state) => ({
       getData: state.getHoroscope,

@@ -1,15 +1,12 @@
-import { LinearContainer } from '@/shared/components/linear-containet.component';
-import { LoadingCircle } from '@/shared/components/loadin.component';
-import { RequestPermissionComponent } from '@/shared/components/request-permission.component';
-import { usePushNotification } from '@/shared/hooks/use-push-notification.hook';
-import { TarotCardContainer } from './components/taror-cards-container';
-import { colorsLight } from '@/shared/constants/colors.contants';
-import { useTarotStore } from './tarot.store';
+import { router, Stack } from 'expo-router';
 import { useEffect } from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { useTarotStore } from './tarot.store';
+import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 
 export default function TarotLayout() {
-  const { isLoading, expoPushToken } = usePushNotification();
-  const { getReadingTarot } = useTarotStore();
+  const expoPushToken = useAppStore((state) => state.pushNotificationToken);
+  const { getReadingTarot, readingResult } = useTarotStore();
 
   useEffect(() => {
     if (expoPushToken) {
@@ -17,25 +14,59 @@ export default function TarotLayout() {
     }
   }, [expoPushToken]);
 
+  let initialRouteName = 'tarot-loading/tarot-loading.container';
+
+  if (readingResult) {
+    initialRouteName = 'tarot-reading/tarot-reading.container';
+  }
+
+  useEffect(() => {
+    if (readingResult) {
+      router.replace({
+        pathname: '/modules/tarot/tarot-reading/tarot-reading.container',
+      });
+    }
+  }, [readingResult]);
+
   return (
-    <LinearContainer>
-      <RequestPermissionComponent />
+    <Stack
+      screenOptions={{ header: () => null }}
+      initialRouteName={initialRouteName}
+    >
+      <Stack.Screen
+        name="tarot-loading/tarot-loading.container"
+        options={{
+          headerTitle: () => (
+            <Text style={styles.titleStyle}>{'tarotTitle'}</Text>
+          ),
+        }}
+      />
 
-      {isLoading ? (
-        <LoadingCircle
-          containerStyle={{
-            position: 'absolute',
-            zIndex: 4,
-            flex: 1,
-            backgroundColor: colorsLight.colors.darkPurple,
-            marginTop: 0,
-            width: '100%',
-            height: '100%',
-          }}
-        />
-      ) : null}
+      <Stack.Screen
+        name="tarot.container"
+        options={{
+          headerTitle: () => (
+            <Text style={styles.titleStyle}>{'tarotTitle'}</Text>
+          ),
+        }}
+      />
 
-      {!isLoading ? <TarotCardContainer /> : null}
-    </LinearContainer>
+      <Stack.Screen
+        name="tarot-reading/tarot-reading.container"
+        options={{
+          headerTitle: () => (
+            <Text style={styles.titleStyle}>{'tarotTitle'}</Text>
+          ),
+        }}
+      />
+    </Stack>
   );
 }
+
+const styles = StyleSheet.create({
+  titleStyle: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
