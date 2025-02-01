@@ -8,12 +8,14 @@ interface State {
   isLoading: boolean;
   position: number;
   formatedDate: string;
+  pushNotificationToken: string;
 }
 
 interface Actions {
   getHoroscope: () => Promise<void>;
   setErrors: (errors: string[]) => void;
   setPosition: (position: number) => void;
+  setPushNotificationToken: (token: string) => void;
 }
 
 export const useAppStore = create<State & Actions>((set) => ({
@@ -22,6 +24,8 @@ export const useAppStore = create<State & Actions>((set) => ({
   isLoading: false,
   position: 0,
   formatedDate: '',
+  pushNotificationToken: '',
+  setPushNotificationToken: (token) => set({ pushNotificationToken: token }),
   getHoroscope: async () => {
     set({ isLoading: true });
 

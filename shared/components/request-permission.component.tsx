@@ -5,12 +5,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { usePushNotification } from '../hooks/use-push-notification.hook';
 import { Fragment } from 'react';
 import {
   tarotAlert,
   tarotPermissionButton,
 } from '../constants/strings.constants';
+import { usePushNotification } from '../hooks/use-push-notification.hook';
 
 const { width } = Dimensions.get('screen');
 

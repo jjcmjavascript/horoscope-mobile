@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getTarot } from './tarot.service';
+import { tarotServiceCreate, tarotServiceIndex } from './tarot.service';
 import { CardEntity } from '@/shared/entities/card.entity';
 import { cardsRandom } from './helpers/cards.helper';
 
@@ -21,7 +21,8 @@ interface Actions {
   shuffle: () => void;
   ramdonSelect: () => void;
   editMessageHeader: (messageHeader: MessageHeaderType) => void;
-  getReadingTarot: (
+  getReadingTarot: (token: string) => void;
+  createReadingTarot: (
     seletedCards: CardEntity[],
     messageHeader: MessageHeaderType,
   ) => void;
@@ -33,7 +34,6 @@ export const useTarotStore = create<State & Actions>((set) => {
     messageHeader: {
       name: null,
       question: null,
-      token: null,
     },
     seletedCards: [],
     cards: [...cardsRandom],
@@ -79,14 +79,23 @@ export const useTarotStore = create<State & Actions>((set) => {
         messageHeader: { ...state.messageHeader, ...messageHeader },
       }));
     },
-    getReadingTarot: async (
+    getReadingTarot: async (token: string) => {
+      const result = await tarotServiceIndex(token);
+
+      if (result.ok) {
+        set(() => ({
+          readingResult: result.data,
+        }));
+      }
+    },
+    createReadingTarot: async (
       seletedCards: CardEntity[],
       messageHeader: MessageHeaderType,
     ) => {
-      const result = await getTarot(seletedCards, messageHeader);
+      const result = await tarotServiceCreate(seletedCards, messageHeader);
 
       if (result.ok) {
-        set((state) => ({
+        set(() => ({
           readingResult: result.data,
         }));
       }

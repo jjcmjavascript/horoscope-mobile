@@ -4,13 +4,23 @@ import { RequestPermissionComponent } from '@/shared/components/request-permissi
 import { usePushNotification } from '@/shared/hooks/use-push-notification.hook';
 import { TarotCardContainer } from './components/taror-cards-container';
 import { colorsLight } from '@/shared/constants/colors.contants';
+import { useTarotStore } from './tarot.store';
+import { useEffect } from 'react';
 
-export default function WishesLayout() {
-  const { isLoading } = usePushNotification();
+export default function TarotLayout() {
+  const { isLoading, expoPushToken } = usePushNotification();
+  const { getReadingTarot } = useTarotStore();
+
+  useEffect(() => {
+    if (expoPushToken) {
+      getReadingTarot(expoPushToken);
+    }
+  }, [expoPushToken]);
 
   return (
     <LinearContainer>
       <RequestPermissionComponent />
+
       {isLoading ? (
         <LoadingCircle
           containerStyle={{

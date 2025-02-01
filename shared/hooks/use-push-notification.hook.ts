@@ -3,6 +3,7 @@ import * as Notifications from 'expo-notifications';
 import { registerForPushNotificationsAsync } from '../services/register-for-push-notifications.service';
 import { fetchPublic } from '../services/fetch-api.service';
 import { pushNotificationUrl } from '../constants/urls.constans';
+import { useAppStore } from './use-app-store.hook';
 
 export const usePushNotification = () => {
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -14,20 +15,16 @@ export const usePushNotification = () => {
   >(undefined);
   const notificationListener = useRef<Notifications.EventSubscription>();
   const responseListener = useRef<Notifications.EventSubscription>();
+  const setPushNotificationToken = useAppStore(
+    (state) => state.setPushNotificationToken,
+  );
 
   const createToken = () => {
-    if (expoPushToken) {
-      console.log('token regitered yet');
-      return;
-    }
-
     setLoading(true);
     registerForPushNotificationsAsync()
       .then(async (token) => {
         console.log('try to register');
         if (token) {
-          console.log('token registed');
-
           await fetchPublic({
             url: pushNotificationUrl,
             method: 'POST',
@@ -35,6 +32,7 @@ export const usePushNotification = () => {
           });
         }
         setExpoPushToken(token ?? '');
+        setPushNotificationToken(token ?? '');
       })
       .catch((error: Error) => {
         console.log(error);
@@ -65,7 +63,11 @@ export const usePushNotification = () => {
     };
   };
 
-  useEffect(createToken, []);
+  useEffect(() => {
+    if (!expoPushToken && !isLoading) {
+      createToken();
+    }
+  }, []);
 
   return {
     isLoading,

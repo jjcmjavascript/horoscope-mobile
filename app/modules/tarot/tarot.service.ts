@@ -2,7 +2,33 @@ import { fetchWithKey } from '@/shared/services/fetch-api.service';
 import { CardEntity } from '@/shared/entities/card.entity';
 import { tarotSelectOptions } from './helpers/cards.helper';
 
-export const getTarot = async (
+export const tarotServiceIndex = async (token: string) => {
+  try {
+    const response = await fetchWithKey({
+      url: 'tarots?token=' + token,
+      method: 'GET',
+    });
+
+    console.log(response);
+    if (!response.ok) {
+      throw new Error('Error fetching data');
+    }
+    const responseJson = await response.json();
+
+    return {
+      ok: true,
+      data: responseJson,
+    };
+  } catch (err: unknown) {
+    console.log(err);
+    return {
+      ok: false,
+      errors: ['Error fetching data'],
+    };
+  }
+};
+
+export const tarotServiceCreate = async (
   seletedCards: CardEntity[],
   messageHeader: {
     question?: number | null;
@@ -17,7 +43,6 @@ export const getTarot = async (
       orientation: c.values.orientation,
     }));
 
-    console.log(messageHeader.question);
     const question = messageHeader.question
       ? tarotSelectOptions.find((q) => q.id === messageHeader.question)?.label
       : tarotSelectOptions[0].label;
@@ -33,8 +58,6 @@ export const getTarot = async (
         cards: formated,
       },
     });
-
-    console.log(response);
 
     if (!response.ok) {
       throw new Error('Error fetching data');
