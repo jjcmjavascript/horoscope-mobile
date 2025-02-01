@@ -1,10 +1,10 @@
 # install
-npm i 
+npm i
 
 # execute
 npm start
 
-# build 
+# build
 for playstore aab: eas build --platform android
-for previe apk: eas build -p android --profile preview
+for preview apk: eas build -p android --profile preview
 ./gradlew assembleRelease

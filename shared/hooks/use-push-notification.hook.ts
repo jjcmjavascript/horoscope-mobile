@@ -4,9 +4,15 @@ import { registerForPushNotificationsAsync } from '../services/register-for-push
 import { fetchPublic } from '../services/fetch-api.service';
 import { pushNotificationUrl } from '../constants/urls.constans';
 import { useAppStore } from './use-app-store.hook';
+import { useShallow } from 'zustand/shallow';
 
 export const usePushNotification = () => {
-  const [expoPushToken, setExpoPushToken] = useState('');
+  const { setPushNotificationToken, expoPushToken } = useAppStore(
+    useShallow((state) => ({
+      setPushNotificationToken: state.setPushNotificationToken,
+      expoPushToken: state.pushNotificationToken,
+    })),
+  );
   const [isLoading, setLoading] = useState(false);
   const [notificationPermissionError, setNotificationPermissionError] =
     useState<string>('');
@@ -15,9 +21,6 @@ export const usePushNotification = () => {
   >(undefined);
   const notificationListener = useRef<Notifications.EventSubscription>();
   const responseListener = useRef<Notifications.EventSubscription>();
-  const setPushNotificationToken = useAppStore(
-    (state) => state.setPushNotificationToken,
-  );
 
   const createToken = () => {
     setLoading(true);
@@ -31,7 +34,7 @@ export const usePushNotification = () => {
             body: { token },
           });
         }
-        setExpoPushToken(token ?? '');
+        setPushNotificationToken(token ?? '');
         setPushNotificationToken(token ?? '');
       })
       .catch((error: Error) => {

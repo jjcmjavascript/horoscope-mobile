@@ -7,10 +7,11 @@ import { TarotReponseWithUrlItem } from './tarot.types';
 type MessageHeaderType = {
   name?: string | null;
   question?: number | null;
-  token?: string | null;
+  token: string | null;
 };
 
 interface State {
+  isLoading: boolean;
   readingResult: TarotReponseWithUrlItem[];
   messageHeader: MessageHeaderType;
   seletedCards: CardEntity[];
@@ -31,10 +32,12 @@ interface Actions {
 
 export const useTarotStore = create<State & Actions>((set) => {
   return {
+    isLoading: false,
     readingResult: [],
     messageHeader: {
       name: null,
       question: null,
+      token: null,
     },
     seletedCards: [],
     cards: [...cardsRandom],
@@ -81,6 +84,10 @@ export const useTarotStore = create<State & Actions>((set) => {
       }));
     },
     getReadingTarot: async (token: string) => {
+      set(() => ({
+        isLoading: true,
+      }));
+
       const result = await tarotServiceIndex(token);
 
       if (result.ok) {
@@ -88,11 +95,19 @@ export const useTarotStore = create<State & Actions>((set) => {
           readingResult: result.data,
         }));
       }
+
+      set(() => ({
+        isLoading: false,
+      }));
     },
     createReadingTarot: async (
       seletedCards: CardEntity[],
       messageHeader: MessageHeaderType,
     ) => {
+      set(() => ({
+        isLoading: true,
+      }));
+
       const result = await tarotServiceCreate(seletedCards, messageHeader);
 
       if (result.ok) {
@@ -100,6 +115,10 @@ export const useTarotStore = create<State & Actions>((set) => {
           readingResult: result.data,
         }));
       }
+
+      set(() => ({
+        isLoading: false,
+      }));
     },
   };
 });

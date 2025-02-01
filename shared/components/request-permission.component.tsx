@@ -5,33 +5,31 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Fragment } from 'react';
 import {
   tarotAlert,
   tarotPermissionButton,
 } from '../constants/strings.constants';
-import { usePushNotification } from '../hooks/use-push-notification.hook';
 
 const { width } = Dimensions.get('screen');
 
-export const RequestPermissionComponent = () => {
-  const { expoPushToken, createToken, isLoading } = usePushNotification();
-
+export const RequestPermissionComponent = ({
+  onPress,
+  isLoading,
+}: {
+  onPress: () => void;
+  isLoading: boolean;
+}) => {
   return (
-    <Fragment>
-      {!expoPushToken ? (
-        <View style={styles.container}>
-          <Text>{tarotAlert}</Text>
-          <TouchableOpacity
-            style={styles.buttonAcept}
-            onPress={createToken}
-            disabled={isLoading}
-          >
-            <Text style={styles.buttonTextStyle}>{tarotPermissionButton}</Text>
-          </TouchableOpacity>
-        </View>
-      ) : null}
-    </Fragment>
+    <View style={styles.container}>
+      <Text>{tarotAlert}</Text>
+      <TouchableOpacity
+        style={styles.buttonAcept}
+        onPress={onPress}
+        disabled={isLoading}
+      >
+        <Text style={styles.buttonTextStyle}>{tarotPermissionButton}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

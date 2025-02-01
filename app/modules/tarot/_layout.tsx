@@ -3,22 +3,26 @@ import { useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useTarotStore } from './tarot.store';
 import { useAppStore } from '@/shared/hooks/use-app-store.hook';
+import { useShallow } from 'zustand/shallow';
 
 export default function TarotLayout() {
+  let initialRouteName = 'tarot-loading/tarot-loading.container';
+
   const expoPushToken = useAppStore((state) => state.pushNotificationToken);
-  const { getReadingTarot, readingResult } = useTarotStore();
+
+  const { getReadingTarot, readingResult, isLoading } = useTarotStore(
+    useShallow((state) => ({
+      getReadingTarot: state.getReadingTarot,
+      readingResult: state.readingResult.length > 0,
+      isLoading: state.isLoading,
+    })),
+  );
 
   useEffect(() => {
     if (expoPushToken) {
       getReadingTarot(expoPushToken);
     }
   }, [expoPushToken]);
-
-  let initialRouteName = 'tarot-loading/tarot-loading.container';
-
-  if (readingResult) {
-    initialRouteName = 'tarot-reading/tarot-reading.container';
-  }
 
   useEffect(() => {
     if (readingResult) {
@@ -27,6 +31,24 @@ export default function TarotLayout() {
       });
     }
   }, [readingResult]);
+
+  useEffect(() => {
+    if (isLoading) {
+      router.replace({
+        pathname: '/modules/tarot/tarot-loading/tarot-loading.container',
+      });
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if ((!expoPushToken || !readingResult) && !isLoading) {
+      router.replace({
+        pathname: '/modules/tarot/tarot.container',
+      });
+    }
+  }, [expoPushToken, readingResult, isLoading]);
+
+  console.log('expoPushToken', expoPushToken, isLoading, readingResult);
 
   return (
     <Stack
