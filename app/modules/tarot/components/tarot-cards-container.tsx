@@ -1,10 +1,10 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { TarotCardsSelector } from './tarot-cards-selector';
-import { TarotCardsSelected } from './tarot-selected-cards';
+import { TarotReadButton } from './tarot-read-button';
 import { useTarotStore } from '../tarot.store';
 import { colorsLight } from '@/shared/constants/colors.contants';
 import { useDisabledAddTarotCard } from '../tarot-store.hook';
-import { TarotOptions } from './tarot-options';
+import { TarotForm } from './tarot-form';
 
 export const TarotCardContainer = () => {
   const state = useTarotStore();
@@ -42,9 +42,9 @@ export const TarotCardContainer = () => {
         </Text>
       </TouchableOpacity>
 
-      <TarotOptions />
+      <TarotForm />
 
-      <TarotCardsSelected data={state.seletedCards} />
+      <TarotReadButton />
     </View>
   );
 };

@@ -14,3 +14,5 @@ export const wishesPlaceHolder = 'Agrega alguna meta 🎯.';
 export const tarotAlert =
   'Para usar este módulo debe autorizar las notificaciones';
 export const tarotPermissionButton = 'Autorizar';
+export const tarotYourName = 'Tu nombre';
+export const tarotBirthdayPlaceholder = 'Fecha de nacimiento (opcional)';

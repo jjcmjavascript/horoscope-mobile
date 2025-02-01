@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
-// import { TextInput } from 'react-native-paper';
+import { StyleSheet, TextInput, TextStyle } from 'react-native';
 
 export const InputBlur = ({
   value,
   placeholder,
   handler,
+  style,
 }: {
   value: string;
   placeholder?: string;
   handler: (v: string) => void;
+  style?: TextStyle;
 }) => {
   const [state, setState] = useState<string>('');
   let timer: NodeJS.Timeout | null;
@@ -36,7 +37,7 @@ export const InputBlur = ({
       }}
       value={state}
       placeholder={placeholder}
-      style={styles.textInput}
+      style={[styles.textInput, style]}
     />
   );
 };

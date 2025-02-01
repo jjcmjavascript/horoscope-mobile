@@ -6,8 +6,9 @@ import { TarotReponseWithUrlItem } from './tarot.types';
 
 type MessageHeaderType = {
   name?: string | null;
+  birthday?: string | null;
   question?: number | null;
-  token: string | null;
+  token?: string | null;
 };
 
 interface State {
@@ -36,6 +37,7 @@ export const useTarotStore = create<State & Actions>((set) => {
     readingResult: [],
     messageHeader: {
       name: null,
+      birthday: null,
       question: null,
       token: null,
     },

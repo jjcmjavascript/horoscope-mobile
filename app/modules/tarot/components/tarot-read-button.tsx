@@ -1,25 +1,24 @@
-import { CardEntity } from '@/shared/entities/card.entity';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useTarotStore } from '../tarot.store';
 import { useDisabledAddTarotCard } from '../tarot-store.hook';
 import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 import { colorsLight } from '@/shared/constants/colors.contants';
 
-export const TarotCardsSelected = ({ data }: { data: CardEntity[] }) => {
+export const TarotReadButton = () => {
   const state = useTarotStore((state) => state);
   const tarotDisabled = useDisabledAddTarotCard();
   const pushNotificationToken = useAppStore(
     (state) => state.pushNotificationToken,
   );
 
-  console.log(state.messageHeader);
-
   return (
     <View>
       <TouchableOpacity
         style={{
           borderColor: colorsLight.colors.gray,
-          backgroundColor: colorsLight.colors.darkPurple,
+          backgroundColor: tarotDisabled
+            ? colorsLight.colors.darkPurple
+            : colorsLight.colors.textInactive,
           padding: 10,
           width: '30%',
           borderRadius: 10,
