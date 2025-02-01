@@ -64,7 +64,6 @@ export const tarotServiceCreate = async (
         question: question,
         birthday: messageHeader.birthday || '',
         token: messageHeader.token,
-        card_number: formated.length,
         cards: formated,
       },
     });

@@ -3,6 +3,7 @@ import { useTarotStore } from '../tarot.store';
 import { useDisabledAddTarotCard } from '../tarot-store.hook';
 import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 import { colorsLight } from '@/shared/constants/colors.contants';
+import { tarotButtonVerLectura } from '@/shared/constants/strings.constants';
 
 export const TarotReadButton = () => {
   const state = useTarotStore((state) => state);
@@ -40,7 +41,7 @@ export const TarotReadButton = () => {
             color: colorsLight.colors.textActive,
           }}
         >
-          Ver Lectura
+          {tarotButtonVerLectura}
         </Text>
       </TouchableOpacity>
       <Text

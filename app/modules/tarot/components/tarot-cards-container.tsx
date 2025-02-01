@@ -5,6 +5,7 @@ import { useTarotStore } from '../tarot.store';
 import { colorsLight } from '@/shared/constants/colors.contants';
 import { useDisabledAddTarotCard } from '../tarot-store.hook';
 import { TarotForm } from './tarot-form';
+import { tarotReadingMessage } from '@/shared/constants/strings.constants';
 
 export const TarotCardContainer = () => {
   const state = useTarotStore();
@@ -13,6 +14,18 @@ export const TarotCardContainer = () => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center' }}>
+      <Text
+        style={{
+          padding: 10,
+          fontSize: 20,
+          fontWeight: 'bold',
+          marginTop: 20,
+          color: colorsLight.colors.textActive,
+          textAlign: 'center',
+        }}
+      >
+        {tarotReadingMessage}
+      </Text>
       <TarotCardsSelector
         data={state.cards}
         onPress={state.selectOne}

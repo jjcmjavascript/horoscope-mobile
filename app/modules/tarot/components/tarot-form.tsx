@@ -7,10 +7,7 @@ import {
   tarotBirthdayPlaceholder,
   tarotYourName,
 } from '@/shared/constants/strings.constants';
-// import DatePicker from 'react-native-date-picker';
-import { useState } from 'react';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { colorsLight } from '@/shared/constants/colors.contants';
 
 const { width } = Dimensions.get('screen');

@@ -16,3 +16,6 @@ export const tarotAlert =
 export const tarotPermissionButton = 'Autorizar';
 export const tarotYourName = 'Tu nombre';
 export const tarotBirthdayPlaceholder = 'Fecha de nacimiento (opcional)';
+export const tarotButtonVerLectura = 'Ver Lectura 🌌';
+export const tarotReadingMessage =
+  '🔮 Selecciona 7 cartas del tarot para realizar tu lectura 🔮';

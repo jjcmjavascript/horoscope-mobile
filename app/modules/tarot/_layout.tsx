@@ -48,8 +48,6 @@ export default function TarotLayout() {
     }
   }, [expoPushToken, readingResult, isLoading]);
 
-  console.log('expoPushToken', expoPushToken, isLoading, readingResult);
-
   return (
     <Stack
       screenOptions={{ header: () => null }}
