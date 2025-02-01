@@ -7,7 +7,7 @@ function handleRegistrationError(errorMessage: string) {
   console.error(errorMessage);
 }
 
-export async function registerForPushNotificationsAsync() {
+export async function registerForPushNotificationsAsync(currentPath: string) {
   if (Platform.OS === 'android') {
     Notifications.setNotificationChannelAsync('default', {
       name: 'default',
@@ -29,7 +29,7 @@ export async function registerForPushNotificationsAsync() {
     }
 
     if (finalStatus !== 'granted') {
-      if (!canAskAgain) {
+      if (!canAskAgain && currentPath !== '/') {
         Alert.alert(
           'Permisos requeridos',
           'Para recibir notificaciones, activa los permisos en la configuración del sistema.',

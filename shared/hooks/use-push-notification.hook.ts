@@ -5,8 +5,10 @@ import { fetchPublic } from '../services/fetch-api.service';
 import { pushNotificationUrl } from '../constants/urls.constans';
 import { useAppStore } from './use-app-store.hook';
 import { useShallow } from 'zustand/shallow';
+import { usePathname } from 'expo-router';
 
 export const usePushNotification = () => {
+  const currentPath = usePathname();
   const { setPushNotificationToken, expoPushToken } = useAppStore(
     useShallow((state) => ({
       setPushNotificationToken: state.setPushNotificationToken,
@@ -24,9 +26,8 @@ export const usePushNotification = () => {
 
   const createToken = () => {
     setLoading(true);
-    registerForPushNotificationsAsync()
+    registerForPushNotificationsAsync(currentPath)
       .then(async (token) => {
-        console.log('try to register');
         if (token) {
           await fetchPublic({
             url: pushNotificationUrl,

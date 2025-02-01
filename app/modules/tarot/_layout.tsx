@@ -4,10 +4,12 @@ import { StyleSheet, Text } from 'react-native';
 import { useTarotStore } from './tarot.store';
 import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 import { useShallow } from 'zustand/shallow';
+import { usePushNotification } from '@/shared/hooks/use-push-notification.hook';
 
 export default function TarotLayout() {
   let initialRouteName = 'tarot-loading/tarot-loading.container';
 
+  const { isLoading: isLoadingNotification } = usePushNotification();
   const expoPushToken = useAppStore((state) => state.pushNotificationToken);
 
   const { getReadingTarot, readingResult, isLoading } = useTarotStore(
@@ -33,20 +35,24 @@ export default function TarotLayout() {
   }, [readingResult]);
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || isLoadingNotification) {
       router.replace({
         pathname: '/modules/tarot/tarot-loading/tarot-loading.container',
       });
     }
-  }, [isLoading]);
+  }, [isLoading, isLoadingNotification]);
 
   useEffect(() => {
-    if ((!expoPushToken || !readingResult) && !isLoading) {
+    if (
+      (!expoPushToken || !readingResult) &&
+      !isLoading &&
+      !isLoadingNotification
+    ) {
       router.replace({
         pathname: '/modules/tarot/tarot.container',
       });
     }
-  }, [expoPushToken, readingResult, isLoading]);
+  }, [expoPushToken, readingResult, isLoadingNotification, isLoading]);
 
   return (
     <Stack
