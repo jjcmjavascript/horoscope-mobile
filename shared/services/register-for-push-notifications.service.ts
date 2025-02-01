@@ -1,11 +1,10 @@
-import { Platform } from 'react-native';
+import { Platform, Linking, Alert } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 
 function handleRegistrationError(errorMessage: string) {
-  alert(errorMessage);
-  throw new Error(errorMessage);
+  console.error(errorMessage);
 }
 
 export async function registerForPushNotificationsAsync() {
@@ -19,15 +18,30 @@ export async function registerForPushNotificationsAsync() {
   }
 
   if (Device.isDevice) {
-    const { status: existingStatus } =
+    const { status: existingStatus, canAskAgain } =
       await Notifications.getPermissionsAsync();
 
     let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
+
+    if (existingStatus !== 'granted' && canAskAgain) {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
+
     if (finalStatus !== 'granted') {
+      if (!canAskAgain) {
+        Alert.alert(
+          'Permisos requeridos',
+          'Para recibir notificaciones, activa los permisos en la configuración del sistema.',
+          [
+            { text: 'Cancelar', style: 'cancel' },
+            {
+              text: 'Abrir Configuración',
+              onPress: () => Linking.openSettings(),
+            },
+          ],
+        );
+      }
       return;
     }
 
@@ -36,12 +50,12 @@ export async function registerForPushNotificationsAsync() {
       Constants?.easConfig?.projectId;
 
     if (!projectId) {
+      handleRegistrationError('Project ID no encontrado');
     }
+
     try {
       const pushTokenString = (
-        await Notifications.getExpoPushTokenAsync({
-          projectId,
-        })
+        await Notifications.getExpoPushTokenAsync({ projectId })
       ).data;
 
       return pushTokenString;
@@ -49,6 +63,8 @@ export async function registerForPushNotificationsAsync() {
       handleRegistrationError(`${e}`);
     }
   } else {
-    handleRegistrationError('Must use physical device for push notifications');
+    handleRegistrationError(
+      'Debes usar un dispositivo físico para recibir notificaciones push.',
+    );
   }
 }
