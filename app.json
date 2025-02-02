@@ -44,6 +44,12 @@
           "defaultChannel": "default",
           "enableBackgroundRemoteNotifications": true
         }
+      ],
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-1322985027681766~9107981671"
+        }
       ]
     ],
     "experiments": {

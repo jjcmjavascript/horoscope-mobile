@@ -66,7 +66,6 @@ export function SwipperComponent() {
         autoPlay={false}
         data={data}
         scrollAnimationDuration={800}
-        style={{ marginBottom: 20 }}
         renderItem={({ item }) => (
           <ScrollView
             style={{

@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { TarotCardsSelector } from './tarot-cards-selector';
 import { TarotReadButton } from './tarot-read-button';
 import { useTarotStore } from '../tarot.store';
@@ -11,6 +11,7 @@ import {
   tarotReadingMessage,
   tarotSubtitleMessage,
 } from '@/shared/constants/strings.constants';
+import { GoogleBanner } from '@/shared/components/google-banner.component';
 
 export const TarotCardContainer = () => {
   const state = useTarotStore();
@@ -18,7 +19,11 @@ export const TarotCardContainer = () => {
   const disabledButton = useDisabledAddTarotCard();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center' }}>
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ alignItems: 'center' }}
+    >
+      <GoogleBanner />
       <Text
         style={{
           padding: 10,
@@ -31,6 +36,7 @@ export const TarotCardContainer = () => {
       >
         {tarotReadingMessage}
       </Text>
+
       <Text
         style={{
           fontSize: 14,
@@ -96,6 +102,6 @@ export const TarotCardContainer = () => {
       <TarotForm />
 
       <TarotReadButton />
-    </View>
+    </ScrollView>
   );
 };

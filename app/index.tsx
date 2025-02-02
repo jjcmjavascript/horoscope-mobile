@@ -17,6 +17,8 @@ import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 import { HomeContainer } from '@/shared/components/home.component';
 import { useShallow } from 'zustand/shallow';
 import { colorsLight } from '@/shared/constants/colors.contants';
+import { useRef } from 'react';
+import { GoogleBanner } from '@/shared/components/google-banner.component';
 
 configureReanimatedLogger({
   strict: false,
@@ -71,6 +73,7 @@ export default function MainComponent() {
           style={styles.background}
           resizeMode="cover"
         >
+
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{formatedDate || ''}</Text>
           </View>
@@ -78,6 +81,7 @@ export default function MainComponent() {
           <HomeContainer isLoading={false} />
         </ImageBackground>
         <Tabs />
+        <GoogleBanner />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -93,7 +97,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   titleContainer: {
-    height: height * 0.2,
+    height: height * 0.1,
     zIndex: 1,
     paddingTop: 20,
   },
