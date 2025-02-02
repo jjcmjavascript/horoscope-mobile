@@ -50,7 +50,7 @@ export const tarotServiceCreate = async (
     const formated = seletedCards.map((c, i) => ({
       order: i,
       name: c.values.name,
-      orientation: c.values.orientati,
+      orientation: c.values.orientation,
     }));
 
     const question = messageHeader.question
