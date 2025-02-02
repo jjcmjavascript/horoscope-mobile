@@ -9,6 +9,7 @@ import {
 } from '@/shared/constants/strings.constants';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { colorsLight } from '@/shared/constants/colors.contants';
+import { getDateYmd } from '@/shared/helpers/date.helper';
 
 const { width } = Dimensions.get('screen');
 
@@ -18,16 +19,17 @@ export const TarotForm = () => {
   const name = useTarotStore((state) => state.messageHeader.name);
   const birthday = useTarotStore((state) => state.messageHeader.birthday);
   const initialDate = new Date();
+
   initialDate.setFullYear(initialDate.getFullYear() - 18);
 
-  const date = new Date(birthday || initialDate.toISOString().split('T')[0]);
+  const date = new Date(birthday || getDateYmd(initialDate));
 
   const showDatePicker = () => {
     DateTimePickerAndroid.open({
       value: date,
       onChange: (_, selectedDate) => {
         editMessageHeader({
-          birthday: selectedDate?.toISOString().split('T')[0],
+          birthday: getDateYmd(selectedDate),
         });
       },
       mode: 'date',

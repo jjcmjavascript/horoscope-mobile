@@ -29,6 +29,7 @@ interface Actions {
     seletedCards: CardEntity[],
     messageHeader: MessageHeaderType,
   ) => void;
+  clearSelection: () => void;
 }
 
 export const useTarotStore = create<State & Actions>((set) => {
@@ -54,6 +55,16 @@ export const useTarotStore = create<State & Actions>((set) => {
         return {
           cards: [...filteredCards],
           seletedCards: [...state.seletedCards, card],
+        };
+      });
+    },
+    clearSelection: () => {
+      set((state) => {
+        const originalCards = [...state.seletedCards, ...state.cards];
+
+        return {
+          cards: originalCards,
+          seletedCards: [],
         };
       });
     },

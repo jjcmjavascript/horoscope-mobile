@@ -5,7 +5,11 @@ import { useTarotStore } from '../tarot.store';
 import { colorsLight } from '@/shared/constants/colors.contants';
 import { useDisabledAddTarotCard } from '../tarot-store.hook';
 import { TarotForm } from './tarot-form';
-import { tarotReadingMessage } from '@/shared/constants/strings.constants';
+import {
+  tarotButtonClearSelection,
+  tarotButtonRadom,
+  tarotReadingMessage,
+} from '@/shared/constants/strings.constants';
 
 export const TarotCardContainer = () => {
   const state = useTarotStore();
@@ -32,29 +36,52 @@ export const TarotCardContainer = () => {
         disabled={disabledButton}
       />
 
-      <TouchableOpacity
-        disabled={disabledButton}
-        onPress={state.ramdonSelect}
-        style={{
-          borderColor: colorsLight.colors.gray,
-          backgroundColor: colorsLight.colors.darkPurple,
-          padding: 10,
-          width: '30%',
-          borderRadius: 10,
-          marginLeft: 10,
-          elevation: 5,
-        }}
-      >
-        <Text
+      <View style={{ flexDirection: 'row', marginTop: 20 }}>
+        <TouchableOpacity
+          disabled={disabledButton}
+          onPress={state.ramdonSelect}
           style={{
-            textAlign: 'center',
-            color: colorsLight.colors.textActive,
+            borderColor: colorsLight.colors.gray,
+            backgroundColor: colorsLight.colors.darkPurple,
+            padding: 10,
+            width: '40%',
+            borderRadius: 10,
+            marginLeft: 10,
+            elevation: 5,
           }}
         >
-          Elegir al azar
-        </Text>
-      </TouchableOpacity>
+          <Text
+            style={{
+              textAlign: 'center',
+              color: colorsLight.colors.textActive,
+            }}
+          >
+            {tarotButtonRadom}
+          </Text>
+        </TouchableOpacity>
 
+        <TouchableOpacity
+          onPress={state.clearSelection}
+          style={{
+            borderColor: colorsLight.colors.gray,
+            backgroundColor: colorsLight.colors.darkPurple,
+            padding: 10,
+            width: '40%',
+            borderRadius: 10,
+            marginLeft: 10,
+            elevation: 5,
+          }}
+        >
+          <Text
+            style={{
+              textAlign: 'center',
+              color: colorsLight.colors.textActive,
+            }}
+          >
+            {tarotButtonClearSelection}
+          </Text>
+        </TouchableOpacity>
+      </View>
       <TarotForm />
 
       <TarotReadButton />

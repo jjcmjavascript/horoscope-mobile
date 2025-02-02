@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, ViewStyle } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { tarotPickerLabel } from '../constants/strings.constants';
 
 interface SelectProps {
   options: { id?: number | string; label: string; value?: string | number }[];
@@ -28,7 +29,7 @@ export const Select: React.FC<SelectProps> = ({
           onValueChange={(itemValue) => onValueChange(itemValue)}
           style={styles.picker}
         >
-          <Picker.Item label="Selecciona una opcion" value={null} />
+          <Picker.Item label={tarotPickerLabel} value={null} />
           {Object.values(options).map((option) => (
             <Picker.Item
               key={option.value || option.id}
