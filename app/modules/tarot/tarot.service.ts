@@ -2,11 +2,12 @@ import { fetchWithKey } from '@/shared/services/fetch-api.service';
 import { CardEntity } from '@/shared/entities/card.entity';
 import { getCardUrl, tarotSelectOptions } from './helpers/cards.helper';
 import { TarotReponseItem, TarotReponseWithUrlItem } from './tarot.types';
+import { tarotUrl } from '@/shared/constants/urls.constans';
 
 export const tarotServiceIndex = async (token: string) => {
   try {
     const response = await fetchWithKey({
-      url: 'tarots?token=' + token,
+      url: `${tarotUrl}?token=${token}`,
       method: 'GET',
     });
 
@@ -49,7 +50,7 @@ export const tarotServiceCreate = async (
     const formated = seletedCards.map((c, i) => ({
       order: i,
       name: c.values.name,
-      orientation: c.values.orientation,
+      orientation: c.values.orientati,
     }));
 
     const question = messageHeader.question
@@ -57,7 +58,7 @@ export const tarotServiceCreate = async (
       : tarotSelectOptions[0].label;
 
     const response = await fetchWithKey({
-      url: 'tarots',
+      url: tarotUrl,
       method: 'POST',
       body: {
         name: messageHeader?.name || '',

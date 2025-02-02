@@ -6,11 +6,13 @@ export const InputBlur = ({
   placeholder,
   handler,
   style,
+  maxLength,
 }: {
   value: string;
   placeholder?: string;
   handler: (v: string) => void;
   style?: TextStyle;
+  maxLength?: number;
 }) => {
   const [state, setState] = useState<string>('');
   let timer: NodeJS.Timeout | null;
@@ -31,9 +33,12 @@ export const InputBlur = ({
   return (
     <TextInput
       onChangeText={(text) => {
-        setState(text);
+        const slicedText = maxLength ? text.slice(0, maxLength) : text;
+
+        setState(slicedText);
+
         timer && clearTimeout(timer);
-        timer = extendedHandler(text);
+        timer = extendedHandler(slicedText);
       }}
       value={state}
       placeholder={placeholder}

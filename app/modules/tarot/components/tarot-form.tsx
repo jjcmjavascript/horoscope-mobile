@@ -51,7 +51,10 @@ export const TarotForm = () => {
       <InputBlur
         placeholder={tarotYourName}
         value={name || ''}
-        handler={(value) => editMessageHeader({ name: value })}
+        maxLength={30}
+        handler={(value) => {
+          editMessageHeader({ name: value });
+        }}
         style={{ marginTop: 10 }}
       />
 

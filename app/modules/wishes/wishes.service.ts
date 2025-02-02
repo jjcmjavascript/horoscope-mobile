@@ -1,13 +1,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as crypto from 'expo-crypto';
-
 import { Wish } from './wish.interface';
 
-// Guardar un dato
 export const createWishes = async (value: Wish) => {
   try {
     const uuid = crypto.randomUUID();
-    await AsyncStorage.setItem(uuid, JSON.stringify({ id: uuid, ...value }));
+    const existingWishes = await getAllWishes();
+
+    await AsyncStorage.setItem(
+      'wish',
+      JSON.stringify([...existingWishes, { id: uuid, ...value }]),
+    );
+
     return { id: uuid, ...value };
   } catch (error) {
     console.error('Error saving data', error);
@@ -16,39 +20,28 @@ export const createWishes = async (value: Wish) => {
 
 export const deleteWish = async (value: string) => {
   try {
-    await AsyncStorage.removeItem(value);
+    const existingWishes = await getAllWishes();
+    const newWishes = existingWishes.filter((wish: Wish) => wish.id !== value);
+
+    await AsyncStorage.setItem('wish', JSON.stringify(newWishes));
   } catch (error) {
     console.error('Error saving data', error);
   }
 };
 
-export const loadWishes = async (key: string) => {
-  try {
-    const value = await AsyncStorage.getItem(key);
-    return value != null ? JSON.parse(value) : null;
-  } catch (error) {
-    console.error('Error reading data', error);
-  }
-};
-
 export const getAllWishes = async () => {
+  let result: Wish[] = [];
+
   try {
-    const keys = await AsyncStorage.getAllKeys();
+    const existingWishes = await AsyncStorage.getItem('wish');
 
-    if (!keys.length) return [];
-
-    const keyValuePairs = await AsyncStorage.multiGet(keys);
-    const result: Wish[] = [];
-
-    keyValuePairs.forEach(([key, value]) => {
-      if (value) {
-        result.push(JSON.parse(value) as Wish);
-      }
-    });
-
-    return result;
+    if (!existingWishes) {
+      await AsyncStorage.setItem('wish', JSON.stringify([]));
+    } else {
+      result = JSON.parse(existingWishes) as Wish[];
+    }
   } catch (error) {
-    console.error('Error al obtener todos los datos:', error);
-    return [];
+    console.error('Error saving data', error);
   }
+  return result;
 };
