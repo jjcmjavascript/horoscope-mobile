@@ -4,6 +4,7 @@ import { useDisabledAddTarotCard } from '../tarot-store.hook';
 import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 import { colorsLight } from '@/shared/constants/colors.contants';
 import { tarotButtonVerLectura } from '@/shared/constants/strings.constants';
+import { useGoogleInterstitial } from '@/shared/hooks/use-google-interstitial.hook';
 
 export const TarotReadButton = () => {
   const state = useTarotStore((state) => state);
@@ -12,6 +13,17 @@ export const TarotReadButton = () => {
     (state) => state.pushNotificationToken,
   );
 
+  const { loaded, show, showed } = useGoogleInterstitial();
+
+  const createReading = () =>
+    state.createReadingTarot(state.seletedCards, {
+      ...state.messageHeader,
+      token: pushNotificationToken,
+    });
+
+  const handleShow = !showed ? show : createReading;
+
+  console.log(!showed, loaded);
   return (
     <View>
       <TouchableOpacity
@@ -21,19 +33,14 @@ export const TarotReadButton = () => {
             ? colorsLight.colors.darkPurple
             : colorsLight.colors.textInactive,
           padding: 10,
-          width: '30%',
+          width: '40%',
           borderRadius: 10,
           marginLeft: 10,
           elevation: 5,
           marginTop: 10,
         }}
         disabled={!tarotDisabled}
-        onPress={() =>
-          state.createReadingTarot(state.seletedCards, {
-            ...state.messageHeader,
-            token: pushNotificationToken,
-          })
-        }
+        onPress={handleShow}
       >
         <Text
           style={{
