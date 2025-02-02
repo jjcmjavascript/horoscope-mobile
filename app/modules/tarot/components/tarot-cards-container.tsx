@@ -9,6 +9,7 @@ import {
   tarotButtonClearSelection,
   tarotButtonRadom,
   tarotReadingMessage,
+  tarotSubtitleMessage,
 } from '@/shared/constants/strings.constants';
 
 export const TarotCardContainer = () => {
@@ -29,6 +30,16 @@ export const TarotCardContainer = () => {
         }}
       >
         {tarotReadingMessage}
+      </Text>
+      <Text
+        style={{
+          fontSize: 14,
+          fontWeight: 'bold',
+          color: colorsLight.colors.textWarning,
+          textAlign: 'center',
+        }}
+      >
+        {tarotSubtitleMessage}
       </Text>
       <TarotCardsSelector
         data={state.cards}

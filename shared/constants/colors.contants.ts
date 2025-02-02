@@ -8,5 +8,6 @@ export const colorsLight = {
     lightPink: '#CE93D8',
     textActive: '#FFFFFF',
     textInactive: '#BDBDBD',
+    textWarning: '#FFC107',
   },
 };
