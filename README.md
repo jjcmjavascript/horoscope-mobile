@@ -5,6 +5,8 @@ npm i
 npm start
 
 # build
-for playstore aab: eas build --platform android
+for playstore aab: eas build --platform android - npx eas-cli build --platform android
+
 for preview apk: eas build -p android --profile preview
+
 ./gradlew assembleRelease
