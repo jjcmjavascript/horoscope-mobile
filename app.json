@@ -18,7 +18,10 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.jgintoki.horoscopemobile",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "com.google.android.gms.permission.AD_ID"
+      ]
     },
     "web": {
       "bundler": "metro",
