@@ -21,7 +21,7 @@ export const TarotReadButton = () => {
       token: pushNotificationToken,
     });
 
-  const handleShow = !showed ? show : createReading;
+  const handleShow = createReading;
 
   console.log(!showed, loaded);
   return (

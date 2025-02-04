@@ -8,6 +8,9 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "react-native-google-mobile-ads": {
+      "android_app_id": "ca-app-pub-1322985027681766~9107981671"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jgintoki.horoscopemobile"
