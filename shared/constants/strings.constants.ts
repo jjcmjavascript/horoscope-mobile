@@ -22,4 +22,4 @@ export const tarotReadingMessage =
 export const tarotPickerLabel = 'Selecciona una opción';
 export const tarotButtonRadom = 'Elegir al azar 🎲';
 export const tarotButtonClearSelection = 'Limpiar 🧹';
-export const tarotSubtitleMessage = '(Solo una lectura cada 2 días)';
+export const tarotSubtitleMessage = '(Solo una lectura cada 5 días)';
