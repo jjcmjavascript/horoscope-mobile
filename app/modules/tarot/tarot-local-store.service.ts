@@ -13,7 +13,7 @@ export const loadTarotData = async () => {
   }
 };
 
-export const initTarot = async () => {
+export const initTarotLocalStorageService = async () => {
   let result = await loadTarotData();
 
   if (!result) {

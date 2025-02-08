@@ -4,18 +4,20 @@ import { InterstitialAd, AdEventType } from 'react-native-google-mobile-ads';
 
 import { config } from '@/config';
 
-
-const interstitial = InterstitialAd.createForAdRequest(config.googleAdUnitIdInterstial, {
-  keywords: [
-    'horoscope',
-    'tarot',
-    'mysticism',
-    'shopping',
-    'fashion',
-    'beauty',
-    'perfumes',
-  ],
-});
+const interstitial = InterstitialAd.createForAdRequest(
+  config.googleAdUnitIdInterstial,
+  {
+    keywords: [
+      'horoscope',
+      'tarot',
+      'mysticism',
+      'shopping',
+      'fashion',
+      'beauty',
+      'perfumes',
+    ],
+  },
+);
 
 export const useGoogleInterstitial = () => {
   const [showed, setShowed] = useState(false);
@@ -33,7 +35,6 @@ export const useGoogleInterstitial = () => {
       AdEventType.OPENED,
       () => {
         if (Platform.OS === 'ios') {
-          // Prevent the close button from being unreachable by hiding the status bar on iOS
           StatusBar.setHidden(true);
         }
       },
@@ -42,9 +43,14 @@ export const useGoogleInterstitial = () => {
     const unsubscribeClosed = interstitial.addAdEventListener(
       AdEventType.CLOSED,
       () => {
+        setShowed(false);
         if (Platform.OS === 'ios') {
           StatusBar.setHidden(false);
         }
+
+        setTimeout(() => {
+          interstitial.load();
+        }, 180000); // 3 minutos de espera
       },
     );
 
@@ -61,16 +67,11 @@ export const useGoogleInterstitial = () => {
     loaded,
     showed,
     show: () => {
-      if (!showed) {
+      if (!showed && loaded) {
         interstitial.show();
         setShowed(true);
-
-        setTimeout(() => {
-          setShowed(false);
-          interstitial.load();
-        }, 180000);
       }
-    }
-
+    },
+    interstitial,
   };
 };

@@ -70,7 +70,7 @@ export const tarotServiceCreate = async (
     });
 
     if (!response.ok) {
-      throw new Error('Error fetching data');
+      throw new Error(`Error fetching data: ${response.status}`);
     }
     const responseJson: TarotReponseItem[] = await response.json();
 

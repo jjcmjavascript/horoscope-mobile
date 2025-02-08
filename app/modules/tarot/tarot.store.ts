@@ -3,6 +3,10 @@ import { tarotServiceCreate, tarotServiceIndex } from './tarot.service';
 import { CardEntity } from '@/shared/entities/card.entity';
 import { cardsRandom } from './helpers/cards.helper';
 import { MessageHeaderType, TarotReponseWithUrlItem } from './tarot.types';
+import {
+  initTarotLocalStorageService,
+  saveTarotData,
+} from './tarot-local-store.service';
 
 interface State {
   isLoading: boolean;
@@ -84,7 +88,8 @@ export const useTarotStore = create<State & Actions>((set) => {
         };
       });
     },
-    editMessageHeader: (messageHeader: MessageHeaderType) => {
+    editMessageHeader: async (messageHeader: MessageHeaderType) => {
+      await saveTarotData({ ...messageHeader });
       set((state) => ({
         messageHeader: { ...state.messageHeader, ...messageHeader },
       }));
@@ -94,7 +99,10 @@ export const useTarotStore = create<State & Actions>((set) => {
         isLoading: true,
       }));
 
-      const result = await tarotServiceIndex(token);
+      const [head, result] = await Promise.all([
+        initTarotLocalStorageService(),
+        tarotServiceIndex(token),
+      ]);
 
       if (result.ok) {
         set(() => ({
@@ -104,6 +112,7 @@ export const useTarotStore = create<State & Actions>((set) => {
 
       set(() => ({
         isLoading: false,
+        messageHeader: { ...head, token },
       }));
     },
     createReadingTarot: async (

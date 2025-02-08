@@ -23,7 +23,6 @@ export const TarotForm = () => {
   initialDate.setFullYear(initialDate.getFullYear() - 18);
 
   const date = new Date(birthday || getDateYmd(initialDate));
-
   const showDatePicker = () => {
     DateTimePickerAndroid.open({
       value: date,

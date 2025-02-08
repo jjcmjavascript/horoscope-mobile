@@ -5,6 +5,8 @@ import { useAppStore } from '@/shared/hooks/use-app-store.hook';
 import { colorsLight } from '@/shared/constants/colors.contants';
 import { tarotButtonVerLectura } from '@/shared/constants/strings.constants';
 import { useGoogleInterstitial } from '@/shared/hooks/use-google-interstitial.hook';
+import { AdEventType } from 'react-native-google-mobile-ads';
+import { useEffect } from 'react';
 
 export const TarotReadButton = () => {
   const state = useTarotStore((state) => state);
@@ -13,17 +15,29 @@ export const TarotReadButton = () => {
     (state) => state.pushNotificationToken,
   );
 
-  const { loaded, show, showed } = useGoogleInterstitial();
+  const { show, interstitial } = useGoogleInterstitial();
 
-  const createReading = () =>
-    state.createReadingTarot(state.seletedCards, {
+  const handler = () => {
+    state.createReadingTarot([...state.seletedCards], {
       ...state.messageHeader,
       token: pushNotificationToken,
     });
+  };
+  const selectedBiggerOrEqualThan7 = state.seletedCards.length >= 7;
 
-  const handleShow = createReading;
+  useEffect(() => {
+    const closeEvent = interstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        handler();
+      },
+    );
 
-  console.log(!showed, loaded);
+    return () => {
+      closeEvent();
+    };
+  }, [selectedBiggerOrEqualThan7]);
+
   return (
     <View>
       <TouchableOpacity
@@ -40,7 +54,7 @@ export const TarotReadButton = () => {
           marginTop: 10,
         }}
         disabled={!tarotDisabled}
-        onPress={handleShow}
+        onPress={show}
       >
         <Text
           style={{
