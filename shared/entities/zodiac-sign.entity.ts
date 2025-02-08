@@ -5,6 +5,7 @@ export interface PrimitiveZodiacSign {
   dinero: string;
   salud: string;
   consejo: string;
+  prediction: string;
 }
 
 export class ZodiacSign {
@@ -14,6 +15,7 @@ export class ZodiacSign {
   private dinero?: string;
   private salud?: string;
   private consejo?: string;
+  private prediction?: string;
 
   constructor(primitive: Partial<PrimitiveZodiacSign>) {
     this.sign = primitive.sign;
@@ -22,6 +24,7 @@ export class ZodiacSign {
     this.dinero = primitive.dinero;
     this.salud = primitive.salud;
     this.consejo = primitive.consejo;
+    this.prediction = primitive.prediction;
   }
 
   get values() {
@@ -32,6 +35,7 @@ export class ZodiacSign {
       dinero: this.dinero,
       salud: this.salud,
       consejo: this.consejo,
+      prediction: this.prediction,
     };
   }
 }

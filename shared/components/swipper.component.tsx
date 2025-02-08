@@ -101,21 +101,9 @@ export function SwipperComponent() {
               />
             </TouchableOpacity>
             <View style={styles.card}>
-              <Text style={styles.title}>{item.values.sign}</Text>
-              {item.values.amor && (
-                <Text style={styles.description}>{item.values.amor}</Text>
-              )}
-              {item.values.salud && (
-                <Text style={styles.description}>{item.values.salud}</Text>
-              )}
-              {item.values.familia && (
-                <Text style={styles.description}>{item.values.familia}</Text>
-              )}
-              {item.values.dinero && (
-                <Text style={styles.description}>{item.values.dinero}</Text>
-              )}
-              {item.values.consejo && (
-                <Text style={styles.description}>{item.values.consejo}</Text>
+            <Text style={styles.title}>{item.values.sign}</Text>
+              {item.values.prediction && (
+                <Text style={styles.description}>{item.values.prediction}</Text>
               )}
             </View>
           </ScrollView>
