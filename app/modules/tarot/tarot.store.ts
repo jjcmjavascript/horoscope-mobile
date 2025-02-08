@@ -2,14 +2,7 @@ import { create } from 'zustand';
 import { tarotServiceCreate, tarotServiceIndex } from './tarot.service';
 import { CardEntity } from '@/shared/entities/card.entity';
 import { cardsRandom } from './helpers/cards.helper';
-import { TarotReponseWithUrlItem } from './tarot.types';
-
-type MessageHeaderType = {
-  name?: string | null;
-  birthday?: string | null;
-  question?: number | null;
-  token?: string | null;
-};
+import { MessageHeaderType, TarotReponseWithUrlItem } from './tarot.types';
 
 interface State {
   isLoading: boolean;
