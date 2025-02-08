@@ -28,9 +28,7 @@ export const TarotReadButton = () => {
   useEffect(() => {
     const closeEvent = interstitial.addAdEventListener(
       AdEventType.CLOSED,
-      () => {
-        handler();
-      },
+      handler,
     );
 
     return () => {
