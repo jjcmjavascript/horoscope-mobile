@@ -93,51 +93,69 @@ export const cardsRandom: CardEntity[] = cardList
   );
 
 export const tarotSelectOptions = [
+  {
+    label: '¿Qué mensaje tiene el tarot para mi hoy',
+    id: 31,
+  },
   { label: '¿Qué me espera en el futuro cercano?', id: 29 },
+  {
+    label: '¿Qué mensaje tiene el tarot para mi en el amor?',
+    id: 30,
+  },
+  {
+    label: 'Algo me preocupa en el amor, ¿qué me dice el tarot?',
+    id: 32,
+  },
+  {
+    label: 'algo me preocupa en el trabajo, ¿qué me dice el tarot?',
+    id: 33,
+  },
+  { label: '¿Voy a conseguir el trabajo que deseo?', id: 6 },
+  { label: '¿Me irá bien económicamente este año?', id: 11 },
   { label: '¿Encontraré el amor verdadero?', id: 1 },
-  { label: '¿Mi pareja actual es la indicada?', id: 2 },
+  { label: '¿Alguna advertencia sobre mi bienestar?', id: 16 },
+  { label: '¿Debo cambiar de trabajo o quedarme donde estoy?', id: 7 },
+  { label: '¿Cómo puedo superar mis problemas financieros?', id: 13 },
+  {
+    label: '¿Qué mensaje tiene el tarot para mi entorno familiar?',
+    id: 20,
+  },
+  {
+    label: '¿Qué puedo hacer para mejorar mi salud física o mental?',
+    id: 15,
+  },
+  { label: '¿Qué me detiene en mi crecimiento personal?', id: 22 },
+  { label: '¿Cómo puedo encontrar mi equilibrio espiritual?', id: 23 },
+  { label: '¿Es un buen momento para mudarme/cambiar de ciudad?', id: 26 },
   // { label: '¿Cómo superar esta ruptura amorosa?', id: 3 },
   // { label: '¿Hay futuro en mi relación actual?', id: 4 },
   // { label: '¿Qué necesito hacer para mejorar mi relación?', id: 5 },
-  { label: '¿Voy a conseguir el trabajo que deseo?', id: 6 },
-  { label: '¿Debo cambiar de trabajo o quedarme donde estoy?', id: 7 },
   // { label: '¿Qué oportunidades laborales se aproximan?', id: 8 },
   // { label: '¿Cómo mejorar mi situación profesional?', id: 9 },
   // {
   //   label: '¿Estoy en el camino correcto para alcanzar mis metas laborales?',
   //   id: 10,
   // },
-  { label: '¿Me irá bien económicamente este año?', id: 11 },
-  { label: '¿Debo invertir en este proyecto?', id: 12 },
-  { label: '¿Cómo puedo superar mis problemas financieros?', id: 13 },
   // {
   //   label: '¿Llegará una oportunidad económica importante para mí?',
   //   id: 14,
   // },
-  {
-    label: '¿Qué puedo hacer para mejorar mi salud física o mental?',
-    id: 15,
-  },
-  { label: '¿Alguna advertencia sobre mi bienestar?', id: 16 },
+
   // {
   //   label: '¿Cómo mantenerme equilibrado en este momento de estrés?',
   //   id: 17,
   // },
-  { label: '¿Cómo mejorar mi relación con mi familia?', id: 18 },
+  // { label: '¿Cómo mejorar mi relación con mi familia?', id: 18 },
   // {
   //   label: '¿Qué puedo hacer para resolver este conflicto con un amigo?',
   //   id: 19,
   // },
-  {
-    label: '¿Qué mensaje tiene el tarot para mi entorno familiar?',
-    id: 20,
-  },
+
   // { label: '¿Cuál es mi propósito en la vida?', id: 21 },
-  { label: '¿Qué me detiene en mi crecimiento personal?', id: 22 },
-  { label: '¿Cómo puedo encontrar mi equilibrio espiritual?', id: 23 },
+
+
   // {
   //   label: '¿Qué lecciones debo aprender en este momento de mi vida?',
   //   id: 24,
   // },
-  { label: '¿Es un buen momento para mudarme/cambiar de ciudad?', id: 26 },
 ];

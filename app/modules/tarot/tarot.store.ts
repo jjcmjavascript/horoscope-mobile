@@ -39,7 +39,7 @@ export const useTarotStore = create<State & Actions>((set) => {
     messageHeader: {
       name: null,
       birthday: null,
-      question: null,
+      question: 31,
       token: null,
     },
     seletedCards: [],
