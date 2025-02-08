@@ -99,27 +99,28 @@ export const tarotSelectOptions = [
   },
   { label: '¿Qué me espera en el futuro cercano?', id: 29 },
   {
-    label: '¿Qué mensaje tiene el tarot para mi en el amor?',
+    label: '¿Mensaje del tarot para mi en el amor?',
     id: 30,
   },
   {
-    label: 'Algo me preocupa en el amor, ¿qué me dice el tarot?',
+    label: '¿Qué mensaje tiene el tarot para mi entorno familiar?',
+    id: 20,
+  },
+  { label: '¿Alguna advertencia sobre mi bienestar?', id: 16 },
+  {
+    label: 'Algo me preocupa en el amor',
     id: 32,
   },
   {
-    label: 'algo me preocupa en el trabajo, ¿qué me dice el tarot?',
+    label: 'algo me preocupa en el trabajo',
     id: 33,
   },
   { label: '¿Voy a conseguir el trabajo que deseo?', id: 6 },
   { label: '¿Me irá bien económicamente este año?', id: 11 },
   { label: '¿Encontraré el amor verdadero?', id: 1 },
-  { label: '¿Alguna advertencia sobre mi bienestar?', id: 16 },
   { label: '¿Debo cambiar de trabajo o quedarme donde estoy?', id: 7 },
   { label: '¿Cómo puedo superar mis problemas financieros?', id: 13 },
-  {
-    label: '¿Qué mensaje tiene el tarot para mi entorno familiar?',
-    id: 20,
-  },
+
   {
     label: '¿Qué puedo hacer para mejorar mi salud física o mental?',
     id: 15,
@@ -152,7 +153,6 @@ export const tarotSelectOptions = [
   // },
 
   // { label: '¿Cuál es mi propósito en la vida?', id: 21 },
-
 
   // {
   //   label: '¿Qué lecciones debo aprender en este momento de mi vida?',

@@ -3,6 +3,7 @@ import { CardEntity } from '@/shared/entities/card.entity';
 import { getCardUrl, tarotSelectOptions } from './helpers/cards.helper';
 import { TarotReponseItem, TarotReponseWithUrlItem } from './tarot.types';
 import { tarotUrl } from '@/shared/constants/urls.constans';
+import { getAllWishes } from '../wishes/wishes.service';
 
 export const tarotServiceIndex = async (token: string) => {
   try {
@@ -57,6 +58,10 @@ export const tarotServiceCreate = async (
       ? tarotSelectOptions.find((q) => q.id === messageHeader.question)?.label
       : tarotSelectOptions[0].label;
 
+    const wishes = await getAllWishes();
+    const wishesTruncated = wishes.map((wish) =>
+      wish.description.slice(0, 150),
+    );
     const response = await fetchWithKey({
       url: tarotUrl,
       method: 'POST',
@@ -66,6 +71,7 @@ export const tarotServiceCreate = async (
         birthday: messageHeader.birthday || '',
         token: messageHeader.token,
         cards: formated,
+        goals: wishesTruncated,
       },
     });
 
