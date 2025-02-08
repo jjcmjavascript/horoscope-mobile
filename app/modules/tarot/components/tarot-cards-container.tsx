@@ -11,7 +11,6 @@ import {
   tarotReadingMessage,
   tarotSubtitleMessage,
 } from '@/shared/constants/strings.constants';
-import { GoogleBanner } from '@/shared/components/google-banner.component';
 
 export const TarotCardContainer = () => {
   const state = useTarotStore();
@@ -23,7 +22,6 @@ export const TarotCardContainer = () => {
       style={{ flex: 1 }}
       contentContainerStyle={{ alignItems: 'center' }}
     >
-      <GoogleBanner />
       <Text
         style={{
           padding: 10,
@@ -102,6 +100,7 @@ export const TarotCardContainer = () => {
       <TarotForm />
 
       <TarotReadButton />
+
     </ScrollView>
   );
 };
