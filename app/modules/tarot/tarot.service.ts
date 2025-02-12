@@ -45,6 +45,7 @@ export const tarotServiceCreate = async (
     name?: string | null;
     birthday?: string | null;
     token?: string | null;
+    thoughts?: string | null;
   },
 ) => {
   try {
@@ -68,6 +69,7 @@ export const tarotServiceCreate = async (
       body: {
         name: messageHeader?.name || '',
         question: question,
+        thoughts: messageHeader.thoughts?.slice(0, 200) || '',
         birthday: messageHeader.birthday || '',
         token: messageHeader.token,
         cards: formated,

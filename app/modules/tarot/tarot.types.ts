@@ -5,4 +5,5 @@ export type MessageHeaderType = {
   birthday?: string | null;
   question?: number | null;
   token?: string | null;
+  thoughts?: string | null;
 };

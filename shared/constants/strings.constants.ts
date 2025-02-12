@@ -15,6 +15,7 @@ export const tarotAlert =
   'Para usar este módulo debe autorizar las notificaciones';
 export const tarotPermissionButton = 'Autorizar';
 export const tarotYourName = 'Tu nombre (opcional)';
+export const tarotYourThoughts = '¿Algo que quieras decir? (opcional)';
 export const tarotBirthdayPlaceholder = 'Fecha de nacimiento (opcional)';
 export const tarotButtonVerLectura = 'Ver Lectura 🌌';
 export const tarotReadingMessage =

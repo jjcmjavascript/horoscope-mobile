@@ -103,7 +103,7 @@ export const tarotSelectOptions = [
     id: 30,
   },
   {
-    label: '¿Qué mensaje tiene el tarot para mi entorno familiar?',
+    label: '¿Mensaje en el entorno familiar?',
     id: 20,
   },
   { label: '¿Alguna advertencia sobre mi bienestar?', id: 16 },

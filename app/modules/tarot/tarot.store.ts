@@ -38,6 +38,7 @@ export const useTarotStore = create<State & Actions>((set) => {
       birthday: null,
       question: 31,
       token: null,
+      thoughts: null,
     },
     seletedCards: [],
     cards: [...cardsRandom],

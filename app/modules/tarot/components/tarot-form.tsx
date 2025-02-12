@@ -6,6 +6,7 @@ import { InputBlur } from '@/shared/components/input-blur.component';
 import {
   tarotBirthdayPlaceholder,
   tarotYourName,
+  tarotYourThoughts,
 } from '@/shared/constants/strings.constants';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { colorsLight } from '@/shared/constants/colors.contants';
@@ -18,6 +19,7 @@ export const TarotForm = () => {
   const question = useTarotStore((state) => state.messageHeader.question);
   const name = useTarotStore((state) => state.messageHeader.name);
   const birthday = useTarotStore((state) => state.messageHeader.birthday);
+  const thoughts = useTarotStore((state) => state.messageHeader.thoughts);
   const initialDate = new Date();
 
   initialDate.setFullYear(initialDate.getFullYear() - 18);
@@ -53,6 +55,16 @@ export const TarotForm = () => {
         maxLength={30}
         handler={(value) => {
           editMessageHeader({ name: value });
+        }}
+        style={{ marginTop: 10 }}
+      />
+
+      <InputBlur
+        placeholder={tarotYourThoughts}
+        value={thoughts || ''}
+        maxLength={200}
+        handler={(value) => {
+          editMessageHeader({ thoughts: value });
         }}
         style={{ marginTop: 10 }}
       />
