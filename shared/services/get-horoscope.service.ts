@@ -34,12 +34,16 @@ export const getHoroscope = async (): Promise<HoroscopeResponse | string> => {
     for (let key in responseData.signs) {
       const cleanedKey = removeAccents(key).toLocaleLowerCase();
       const position: number = order[cleanedKey];
+      const keyCapitalize = key.charAt(0).toUpperCase() + key.slice(1);
 
-      tempArray.splice(position, 1, { sign: key, ...responseData.signs[key] });
+      tempArray.splice(position, 1, {
+        sign: keyCapitalize,
+        ...responseData.signs[key],
+      });
     }
 
     return {
-      data: tempArray.map((value) => new ZodiacSign(value)),
+      data: tempArray.filter((i) => i).map((value) => new ZodiacSign(value)),
       formatedData: responseData.formatedDate,
     };
   } catch (err: unknown) {
