@@ -52,7 +52,7 @@ export const TarotReadButton = () => {
           marginTop: 10,
         }}
         disabled={!tarotDisabled}
-        onPress={show}
+        onPress={handler}
       >
         <Text
           style={{
