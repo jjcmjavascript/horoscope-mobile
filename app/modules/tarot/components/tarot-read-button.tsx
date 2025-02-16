@@ -15,7 +15,7 @@ export const TarotReadButton = () => {
     (state) => state.pushNotificationToken,
   );
 
-  // const { show, interstitial } = useGoogleInterstitial();
+  const { show, interstitial } = useGoogleInterstitial();
 
   const handler = () => {
     state.createReadingTarot([...state.seletedCards], {
@@ -25,16 +25,16 @@ export const TarotReadButton = () => {
   };
   const selectedBiggerOrEqualThan7 = state.seletedCards.length >= 7;
 
-  // useEffect(() => {
-  //   const closeEvent = interstitial.addAdEventListener(
-  //     AdEventType.CLOSED,
-  //     handler,
-  //   );
+  useEffect(() => {
+    const closeEvent = interstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      handler,
+    );
 
-  //   return () => {
-  //     closeEvent();
-  //   };
-  // }, [selectedBiggerOrEqualThan7]);
+    return () => {
+      closeEvent();
+    };
+  }, [selectedBiggerOrEqualThan7]);
 
   return (
     <View>
@@ -52,7 +52,7 @@ export const TarotReadButton = () => {
           marginTop: 10,
         }}
         disabled={!tarotDisabled}
-        onPress={handler}
+        onPress={show}
       >
         <Text
           style={{
