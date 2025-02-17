@@ -14,4 +14,10 @@ for playstore aab: eas build -p android --profile production
 
 for testing without ads apk: eas build -p android --profile preview
 
-./gradlew assembleRelease
+### For manual build
+
+- folder result: android/app/build/outputs/apk/release/app-release.apk
+- APK
+  ./android/gradlew assembleRelease
+- AAB
+  ./android/gradlew bundleRelease

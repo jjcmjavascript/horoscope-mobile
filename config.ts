@@ -16,6 +16,10 @@ export const config = {
   baseApiUrl,
   apiKey: process.env.EXPO_PUBLIC_MOBILE_KEY,
   imageUrl: process.env.EXPO_PUBLIC_IMAGE_URL,
-  googleAdUnitId:  __DEV__ ? TestIds.ADAPTIVE_BANNER : process.env.EXPO_PUBLIC_AD_UNIT_ID as string,
-  googleAdUnitIdInterstial:  __DEV__ ? TestIds.INTERSTITIAL : process.env.EXPO_PUBLIC_AD_UNIT_ID as string,
+  googleAdUnitId: __DEV__
+    ? TestIds.ADAPTIVE_BANNER
+    : (process.env.EXPO_PUBLIC_AD_BANNER as string),
+  googleAdUnitIdInterstial: __DEV__
+    ? TestIds.INTERSTITIAL
+    : (process.env.EXPO_PUBLIC_AD_INTERSTICIAL as string),
 };
