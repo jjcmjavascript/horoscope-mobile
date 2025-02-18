@@ -47,3 +47,4 @@ google-services.json
 android
 key.keystore
 ios
+.idea/*

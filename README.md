@@ -18,6 +18,6 @@ for testing without ads apk: eas build -p android --profile preview
 
 - folder result: android/app/build/outputs/apk/release/app-release.apk
 - APK
-  ./android/gradlew assembleRelease
+  cd ./android && ./gradlew assembleRelease
 - AAB
-  ./android/gradlew bundleRelease
+  cd ./android &&/gradlew bundleRelease

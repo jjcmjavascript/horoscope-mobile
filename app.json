@@ -22,9 +22,7 @@
       },
       "package": "com.jgintoki.horoscopemobile",
       "googleServicesFile": "./google-services.json",
-      "permissions": [
-        "com.google.android.gms.permission.AD_ID"
-      ]
+      "permissions": ["com.google.android.gms.permission.AD_ID"]
     },
     "web": {
       "bundler": "metro",
@@ -54,7 +52,7 @@
       [
         "react-native-google-mobile-ads",
         {
-          "androidAppId": "ca-app-pub-1322985027681766~9107981671"
+          "androidAppId": "ca-app-pub-8997252076309492~8979745311"
         }
       ]
     ],

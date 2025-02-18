@@ -4,6 +4,7 @@ import { ZodiacSign } from '../entities/zodiac-sign.entity';
 import { fetchWithKey } from './fetch-api.service';
 import { horoscopeUrl } from '../constants/urls.constans';
 import { HoroscopeResponse, ResponseSchema } from '../types/horoscope.types';
+import { config } from '@/config';
 
 export const getHoroscope = async (): Promise<HoroscopeResponse | string> => {
   const order: Record<string, number> = {
@@ -47,7 +48,8 @@ export const getHoroscope = async (): Promise<HoroscopeResponse | string> => {
       formatedData: responseData.formatedDate,
     };
   } catch (err: unknown) {
-    console.log(err);
-    return errorMessage;
+    let error = err as Error;
+
+    return error.message || errorMessage;
   }
 };
