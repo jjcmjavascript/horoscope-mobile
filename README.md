@@ -20,4 +20,4 @@ for testing without ads apk: eas build -p android --profile preview
 - APK
   cd ./android && ./gradlew assembleRelease
 - AAB
-  cd ./android &&/gradlew bundleRelease
+  cd ./android && ./gradlew bundleRelease

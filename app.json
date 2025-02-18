@@ -54,6 +54,21 @@
         {
           "androidAppId": "ca-app-pub-8997252076309492~8979745311"
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "manifest": {
+              "usesPermissions": [
+                {
+                  "name": "com.google.android.gms.permission.AD_ID",
+                  "toolsNode": "remove"
+                }
+              ]
+            }
+          }
+        }
       ]
     ],
     "experiments": {
