@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "react-native-google-mobile-ads": {
-      "android_app_id": "ca-app-pub-1322985027681766~9107981671"
+      "android_app_id": "ca-app-pub-1322985027681766~2846749090"
     },
     "ios": {
       "supportsTablet": true,
@@ -52,7 +52,7 @@
       [
         "react-native-google-mobile-ads",
         {
-          "androidAppId": "ca-app-pub-8997252076309492~8979745311"
+          "androidAppId": "ca-app-pub-1322985027681766~2846749090"
         }
       ],
       [
