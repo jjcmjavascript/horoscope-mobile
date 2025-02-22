@@ -7,6 +7,7 @@ import { WishesList } from './wishes-list';
 import { WishesCreateModal } from './wishes-create-modal';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';
+import { GoogleBanner } from '@/shared/components/google-banner.component';
 
 export default function WishesContainer() {
   const { isLoading, hasWishes, openModal, getWishList } = useWishesStore(
@@ -24,6 +25,8 @@ export default function WishesContainer() {
 
   return (
     <LinearContainer>
+      <GoogleBanner />
+
       {!hasWishes && !isLoading ? <WishesAlertBox /> : null}
 
       <AddButton onPress={openModal} />

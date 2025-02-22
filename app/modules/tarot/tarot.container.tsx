@@ -9,6 +9,8 @@ export default function TarotContainer() {
 
   return (
     <LinearContainer>
+      <GoogleBanner />
+
       {!expoPushToken ? (
         <RequestPermissionComponent
           isLoading={isLoading}
@@ -17,8 +19,6 @@ export default function TarotContainer() {
       ) : null}
 
       {expoPushToken ? <TarotCardContainer /> : null}
-
-    <GoogleBanner />
     </LinearContainer>
   );
 }
