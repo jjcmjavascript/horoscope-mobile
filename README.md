@@ -8,15 +8,27 @@ npm start
 
 # build
 
-For testing with ads: eas build -p android --profile development, you should download the apk from the eas build page
+## Eas
 
-for playstore aab: eas build -p android --profile production
+### Testing
 
-for testing without ads apk: eas build -p android --profile preview
+- With ads: eas build -p android --profile development
+- Without ads apk: eas build -p android --profile preview
 
-### For manual build
+### Production
+
+- aab: eas build -p android --profile production
+
+## Local
+
+### Testing
+
+- npx eas-cli build --profile development --local
 
 - folder result: android/app/build/outputs/apk/release/app-release.apk
+
+### Production
+
 - APK
   cd ./android && ./gradlew assembleRelease
 - AAB
