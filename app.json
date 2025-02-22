@@ -62,8 +62,7 @@
             "manifest": {
               "usesPermissions": [
                 {
-                  "name": "com.google.android.gms.permission.AD_ID",
-                  "toolsNode": "remove"
+                  "name": "com.google.android.gms.permission.AD_ID"
                 }
               ]
             }
